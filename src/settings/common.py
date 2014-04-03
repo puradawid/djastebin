@@ -22,23 +22,25 @@ SECRET_KEY = '1^660lw28_jgsn(-30478w4^62eu5^_8&fw#&e#$lbk@a&_7&9'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
 INSTALLED_APPS = (
+    ##### Default apps ######
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'paste',
-    'pastes',
-    'comment',
+
+    ##### Project apps #####
+    'apps.home',
+
+    ##### Third party apps #####
 )
 
 MIDDLEWARE_CLASSES = (
@@ -54,7 +56,6 @@ ROOT_URLCONF = 'djastebin.urls'
 
 WSGI_APPLICATION = 'djastebin.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
@@ -68,9 +69,9 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pl'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Warsaw'
 
 USE_I18N = True
 
@@ -83,3 +84,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_PATH = os.path.join(BASE_DIR, 'static')
+
+STATICFILES_DIRS = (
+    STATIC_PATH,
+)
+
+TEMPLATE_PATH = os.path.join(BASE_DIR, 'templates')
+
+TEMPLATE_DIRS = (
+     TEMPLATE_PATH,
+)
