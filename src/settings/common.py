@@ -43,7 +43,7 @@ INSTALLED_APPS = (
     'apps.comment',
 
     ##### Third party apps #####
-    
+    "django_cron",
 )
 
 MIDDLEWARE_CLASSES = (
@@ -99,3 +99,7 @@ TEMPLATE_PATH = os.path.join(BASE_DIR, 'templates')
 TEMPLATE_DIRS = (
      TEMPLATE_PATH,
 )
+
+CRON_CLASSES = [
+    "apps.paste.cron.ClearExpiredPastesJob",
+]
