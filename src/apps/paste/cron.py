@@ -13,4 +13,4 @@ class ClearExpiredPastesJob(CronJobBase):
     code = 'apps.paste.clear_expired_pastes'
     
     def do(self):
-        Paste.objects.filter(expire_date__lte=timezone.now())
+        Paste.objects.filter(expire_date__lte=timezone.now()).delete()
