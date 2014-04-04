@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+		<title>index</title>
+		<meta name="description" content="">
+		<meta name="author" content="Adrian">
+
+		<meta name="viewport" content="width=device-width; initial-scale=1.0">
+
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico">
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+		<link rel="stylesheet" href="css/bootstrap.css">
+		<link rel="stylesheet" href="css/bootstrap-extend.css">
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+	</head>
+
+	<body>
+		<nav class="navbar navbar-default">
+			<div class="container">
+				<div class="navbar-header">
+					<a href="../" class="navbar-brand">Djastebin</a>
+					<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<div class="navbar-collapse collapse" id="navbar-main">
+					<ul class="nav navbar-nav">
+						<li>
+							<a href="../help/"><i class="fa fa-file-text-o"></i> Create new paste</a>
+						</li>
+						<li>
+							<a href="../help/"><i class="fa fa-bar-chart-o"></i> Treniding pastes</a>
+						</li>
+					</ul>
+
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<a href="../help/"><i class="fa fa-files-o"></i> My pastes</a>
+						</li>
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes"><i class="fa fa-user"></i> user@gmail.com<span class="caret"></span></a>
+							<ul class="dropdown-menu" aria-labelledby="themes">
+								<li>
+									<a href="../default/"><i class="fa fa-user"></i> Profile</a>
+								</li>
+								<li>
+									<a href="../amelia/"><i class="fa fa-gear"></i> Settings</a>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<a href="../cerulean/"><i class="fa fa-sign-out"></i> Logout</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+
+				</div>
+			</div>
+		</nav>
+
+		<div class="container">
+
+			<div class="row">
+				<div class="col-lg-9">
+					<div class="well bs-component">
+						<form class="form-horizontal">
+							<fieldset>
+								<legend>
+									Change settings
+								</legend>
+								<div class="form-group">
+									<label for="select" class="col-lg-3 control-label">Default syntax:</label>
+									<div class="col-lg-9">
+										<select class="form-control" id="select">
+											<option>None</option>
+											<option>Python</option>
+											<option>Java</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="select" class="col-lg-3 control-label">Default expiration:</label>
+									<div class="col-lg-9">
+										<select class="form-control" id="select">
+											<option>Never</option>
+											<option>10 minutes</option>
+											<option>15 minutes</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-lg-10 col-lg-offset-3">
+										<button type="submit" class="btn btn-primary">
+											Save
+										</button>
+									</div>
+								</div>
+							</fieldset>
+						</form>
+					</div>
+				</div>
+				<div class="col-lg-3">
+					<div class="page-header no-margin-top">
+						<h3 class="no-margin-top">Recently added</h3>
+					</div>
+					<div class="col-lg-13">
+						<div class="bs-component">
+							<div class="list-group">
+								<a href="#" class="list-group-item"> <h5 class="list-group-item-heading">Untitled</h5>
+								<p class="list-group-item-text list-group-item-caption">
+									20 seconds ago
+								</p> </a>
+								<a href="#" class="list-group-item"> <h5 class="list-group-item-heading">Untitled</h5>
+								<p class="list-group-item-text list-group-item-caption">
+									20 seconds ago
+								</p> </a>
+								<a href="#" class="list-group-item"> <h5 class="list-group-item-heading">Untitled</h5>
+								<p class="list-group-item-text list-group-item-caption">
+									20 seconds ago
+								</p> </a>
+								<a href="#" class="list-group-item"> <h5 class="list-group-item-heading">Untitled</h5>
+								<p class="list-group-item-text list-group-item-caption">
+									20 seconds ago
+								</p> </a>
+								<a href="#" class="list-group-item"> <h5 class="list-group-item-heading">Untitled</h5>
+								<p class="list-group-item-text list-group-item-caption">
+									20 seconds ago
+								</p> </a>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+	</body>
+</html>
