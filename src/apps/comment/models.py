@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from paste.models import Paste
+from apps.paste.models import Paste
 
 class Comment(models.Model):
     created = models.DateTimeField(auto_now=True)

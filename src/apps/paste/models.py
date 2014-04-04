@@ -20,7 +20,7 @@ class Paste(models.Model):
     expire_date = models.DateTimeField(null=True, blank=True, default=None)
     hits = models.IntegerField(default=0)
     size = models.FloatField(default=0.00)
-    author = models.ForeignKey(User)
+    author = models.ForeignKey(User, null=True, blank=True, default=None)
     
     def __unicode__(self):
         return self.title

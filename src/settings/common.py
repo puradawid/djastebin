@@ -39,8 +39,11 @@ INSTALLED_APPS = (
 
     ##### Project apps #####
     'apps.home',
+    'apps.paste',
+    'apps.comment',
 
     ##### Third party apps #####
+    
 )
 
 MIDDLEWARE_CLASSES = (
