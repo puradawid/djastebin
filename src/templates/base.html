@@ -1,9 +1,87 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-  <head>
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-    <title>{% block title %}{% endblock %} | DjasteBin</title>
-  </head>
-  <body>
-    {% block content %}{% endblock %}
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+	{% load staticfiles %}
+	{% load humanize %}
+	<head>
+		<meta charset="utf-8">
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+		<title>{% block title %}{% endblock %} | DjasteBin</title>
+		<meta name="description" content="">
+		<meta name="author" content="Adrian">
+
+		<meta name="viewport" content="width=device-width; initial-scale=1.0">
+
+		<link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
+		<link rel="stylesheet" href="{% static "css/bootstrap-extend.css" %}">
+		<link rel="stylesheet" href="{% static "css/font-awesome.min.css" %}">
+	</head>
+
+	<body>
+		<nav class="navbar navbar-default">
+			<div class="container">
+				<div class="navbar-header">
+					<a href="../" class="navbar-brand">Djastebin</a>
+					<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<div class="navbar-collapse collapse" id="navbar-main">
+					<ul class="nav navbar-nav">
+						<li>
+							<a href="{% url "create_paste" %}"><i class="fa fa-file-text-o"></i> Create new paste</a>
+						</li>
+						<li>
+							<a href="{% url "trends" %}"><i class="fa fa-bar-chart-o"></i> Treniding pastes</a>
+						</li>
+					</ul>
+
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<a href="{% url "registration" %}"><i class="fa fa-user"></i> Sign in</a>
+						</li>
+						<li>
+							<a href="{% url "login" %}"><i class="fa fa-sign-in"></i> Log in</a>
+						</li>
+					</ul>
+
+				</div>
+			</div>
+		</nav>
+
+		<div class="container">
+
+			<div class="row">
+				<div class="col-lg-9">
+					{% block content %}{% endblock %}
+				</div>
+				<div class="col-lg-3">
+					<div class="page-header no-margin-top">
+						<h3 class="no-margin-top">Recently added</h3>
+					</div>
+					<div class="col-lg-13">
+						<div class="bs-component">
+							<div class="list-group">
+							{% for paste in recent_pastes %}
+								<a href="{% url "paste_id" paste.pk %}" class="list-group-item"> <h5 class="list-group-item-heading">{{ paste }}</h5>
+								<p class="list-group-item-text list-group-item-caption">
+									{{ paste.created | naturaltime }}
+								</p> </a>
+							{% endfor %}
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+		<script src="{% static "js/bootstrap.min.js" %}"></script>
+	</body>
 </html>
