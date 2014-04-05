@@ -3,5 +3,5 @@ from django.conf.urls import patterns, url
 from . import views
 
 urlpatterns = patterns('',
-    url(r'^$', views.index, name='index')
+    url(r'^(?P<user_name>\w+)/$', views.UserDetailsView.as_view(), name='user')
 )

@@ -24,3 +24,14 @@ class Paste(models.Model):
     
     def __unicode__(self):
         return self.title
+    
+class Comment(models.Model):
+    created = models.DateTimeField(auto_now=True)
+    content = models.TextField()
+    author = models.ForeignKey(User)
+    paste = models.ForeignKey(Paste)
+    parent = models.ForeignKey('self', null=True, blank=True, default=None)
+    
+    def __unicode__(self):
+        return self.date
+

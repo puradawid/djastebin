@@ -1,0 +1,15 @@
+.top15 {
+	margin-top: 15px;
+}
+
+.no-resize {
+	resize: none;
+}
+
+.no-margin-top {
+	margin-top: 0px
+}
+
+.list-group-item-caption {
+	font-size: 0.87em
+}
