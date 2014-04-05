@@ -5,4 +5,4 @@ python:
 # install dependencies
 install: "pip install -r requirements.txt"
 
-script: "python ./src/manage.py test"
+script: "python ./src/manage.py test src/tests"
