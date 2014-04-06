@@ -1,13 +1,26 @@
-from django.shortcuts import render
-from django.views.generic import View
+# ./apps/pastes/views.py
 
-# Create your views here.
+# Django imports
+from django.shortcuts import render, redirect
+from django.core.urlresolvers import reverse
+from django.views.generic import View
+from apps.pastes.models import Paste
+from apps.pastes.forms import PasteForm
+
+# Managing and displaying pastes views
 
 class CreatePasteView(View):
+
     def get(self, request):
-        return render(request, 'home/index.html')
+	form = PasteForm()
+        return render(request, 'pastes/create_paste.html', {'form' : form })
+
     def post(self, request):
-        return render(request, 'home/index.html')
+	form = PasteForm(request.POST) 	
+	if form.is_valid():
+		paste = form.save()
+		return redirect(reverse('paste_id', args=[paste.id])) 
+	return render(request, 'pastes/create_paste.html', {'form' : form })
 
 class ReadPasteView(View):
     def get(self, request, paste_id):
