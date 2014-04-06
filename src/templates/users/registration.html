@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Registration{% endblock %}
+
+{% block content %}
+{% load widget_tweaks %}
+	<div class="well bs-component">
+		<form method="post" class="form-horizontal">{% csrf_token %}
+			{% if form.non_field_errors %}
+				<div class="alert alert-dismissable alert-danger">
+					{% for error in form.non_field_errors %}
+						<p>{{ error | escape }}</p>
+					{% endfor %}
+				</div>
+			{% endif %}
+
+			<fieldset>
+				<legend>
+					Sign in
+				</legend>
+				
+				{% for field in form %}
+					<div class="form-group{% if field.errors %} has-error{% endif %}">
+						<label for="{{ field.label_id }}" class="col-lg-3 control-label">{{ field.label }}</label>
+						<div class="col-lg-9">
+							{{ field | add_class:"form-control" }}
+							{% for error in field.errors %}
+					        <span class="help-block">{{ error|escape }}</span>
+					    {% endfor %}	
+						</div>			
+					</div>
+				{% endfor %}
+				
+				<div class="form-group">
+					<div class="col-lg-10 col-lg-offset-3">
+						<button type="submit" class="btn btn-primary">
+							Submit
+						</button>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+	
+{% endblock %}

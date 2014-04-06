@@ -43,7 +43,8 @@ INSTALLED_APPS = (
     'apps.users',
 
     ##### Third party apps #####
-    "django_cron",
+    'django_cron',
+    'widget_tweaks',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -77,7 +78,7 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
-LANGUAGE_CODE = 'pl'
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Europe/Warsaw'
 
@@ -87,6 +88,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+LOGIN_URL = '/login/'
+
+LOGOUT_URL = '/logout/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
