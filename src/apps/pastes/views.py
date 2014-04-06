@@ -31,7 +31,7 @@ class CreatePasteView(View):
 	else:
 		user = None   	    # IMPORTANT: user can be null!
 	#paste creation
-	paste = Paste.objects.create(title=title, expire_date=expire_date, content=content, visibility = visibility, author=user)	
+	paste = Paste.objects.create(title=title, expire_date=expire_date, content=content, visibility = visibility, author=user, language=syntax)	
 	
 	return redirect(str(paste.id) + "/") 
 
