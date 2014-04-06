@@ -3,8 +3,8 @@
 from django.test import TestCase
 
 #import models
-from apps.comment.models import Comment
-from apps.paste.models import Paste
+from apps.pastes.models import Comment
+from apps.pastes.models import Paste
 from django.contrib.auth.models import User
 
 class DatabaseTestCase(TestCase):
