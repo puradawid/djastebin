@@ -4,17 +4,33 @@
 from django import forms
 from apps.pastes.models import Paste
 
-class CreatePasteForm(forms.Form):
-   EXPIRATION_CHOICES = (
-	('0', 'Never'),
-	('5', '5 minutes'),
-	('10', '10 minutes'),
-   )
-   VISIBILITY_CHOICES = Paste.VISIBILITY_CHOICES
-   SYNTAX_CHOICES = Paste.LANGUAGE_CHOICES #when merged has to be changed to SYNTAX
+# Utilities import
+from datetime import date, timedelta
 
-   title = forms.CharField(label="Name", max_length=100, required=False) 
-   content = forms.CharField(required=True, widget=forms.Textarea)
+class PasteForm(forms.ModelForm):
+   class Meta:
+       model = Paste
+       fields = ['title', 'content', 'language', 'visibility']
+       labels = { 'content' : 'New Paste'}
+
+   EXPIRATION_CHOICES = (
+      ('0', 'Never'),
+      ('5', '5 minutes'),
+      ('10', '10 minutes'),
+   )
+
+   visibility = forms.ChoiceField(choices=Paste.VISIBILITY_CHOICES) 
    expiration = forms.ChoiceField(choices=EXPIRATION_CHOICES)
-   syntax = forms.ChoiceField(label="Syntax Highlighting", choices=SYNTAX_CHOICES)
-   visibility = forms.ChoiceField(choices=VISIBILITY_CHOICES)
+   
+   def save(self):
+       result = super(forms.ModelForm, self).save(commit=False)
+       time = int(self.cleaned_data['expiration'])
+       if time == 0:
+          time = None
+       else:
+          time = date.today() + timedelta(minutes=time)
+       result.expire_date = time 
+       result.save()
+       return result
+
+
