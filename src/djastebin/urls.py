@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from django.contrib.auth.decorators import login_required, permission_required
 
 from django.contrib import admin
 admin.autodiscover()
@@ -10,7 +11,7 @@ import apps.users.views
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^settings/$', apps.users.views.SettingsView.as_view(), name='settings'),
-    url(r'^profile/$', apps.users.views.ProfileView.as_view(), name='profile'),
+    url(r'^profile/$', login_required(apps.users.views.ProfileView.as_view()), name='profile'),
     url(r'^login/$', apps.users.views.LoginView.as_view(), name='login'),
     url(r'^logout/$', apps.users.views.LogoutView.as_view(), name='logout'),
     url(r'^registration/$', apps.users.views.RegistrationView.as_view(), name='registration'),

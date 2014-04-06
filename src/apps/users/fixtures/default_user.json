@@ -12,7 +12,7 @@
 		"pk": "1",
 		"fields": {
 			"username": "default",
-			"password": "1234"
+			"password": "pbkdf2_sha256$12000$hCjC2d7FruC2$2Bb2HDkqi3cMR7RZtSbguGZr0gGCcQMjI5T1oocDSiw="
 		}
 	},
 	{

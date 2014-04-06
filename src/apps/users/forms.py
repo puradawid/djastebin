@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from django.forms.models import ModelForm
+from django.contrib.auth.hashers import make_password
 
 class UserRegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -27,3 +29,35 @@ class UserRegistrationForm(UserCreationForm):
         if User.objects.filter(email=email).exists():
             raise forms.ValidationError("That email is already in use")
         return email
+    
+class ProfileForm(ModelForm):
+    email = forms.EmailField(required=True, widget=forms.TextInput(attrs={'placeholder': 'Your email'}))
+    password = forms.CharField(required=False, widget=forms.PasswordInput(attrs={'placeholder': 'Leave blank if don\'t want to change'}))
+    first_name = forms.CharField(required=False, widget=forms.TextInput(attrs={'placeholder': 'Your first name'}))
+    last_name = forms.CharField(required=False, widget=forms.TextInput(attrs={'placeholder': 'Your last name'}))
+    
+    class Meta:
+        model = User
+        fields = ['email', 'first_name', 'last_name', 'password']
+        
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if (email != self.instance.email and User.objects.filter(email=email).exists()):
+            raise forms.ValidationError("That email is already in use")
+        return email
+    
+    def clean_first_name(self):
+        first_name = self.cleaned_data['first_name']
+        return first_name
+    
+    def clean_last_name(self):
+        last_name = self.cleaned_data['last_name']
+        return last_name
+    
+    def clean_password(self):
+        password = self.cleaned_data['password']
+        if len(password) == 0:
+            password = self.instance.password
+        else:
+            password = make_password(self.cleaned_data['password'])
+        return password
