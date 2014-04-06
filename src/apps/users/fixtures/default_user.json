@@ -1,0 +1,26 @@
+[
+	{
+		"model": "users.settings",
+		"pk": "1",
+		"fields": {
+			"default_syntax": "NONE",
+			"default_visibility": "PUBLIC"
+		}
+	},
+	{
+		"model": "auth.user",
+		"pk": "1",
+		"fields": {
+			"username": "default",
+			"password": "1234"
+		}
+	},
+	{
+		"model": "users.account",
+		"pk": "1",
+		"fields": {
+			"user": 1,
+			"settings": 1
+		}
+	}
+]

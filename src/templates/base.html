@@ -42,12 +42,33 @@
 					</ul>
 
 					<ul class="nav navbar-nav navbar-right">
+						{% if user.is_authenticated %}
+							<li>
+								<a href="{% url "user" user.username %}"><i class="fa fa-files-o"></i> My pastes</a>
+							</li>
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes"><i class="fa fa-user"></i> {{ user.username }}<span class="caret"></span></a>
+								<ul class="dropdown-menu" aria-labelledby="themes">
+									<li>
+										<a href="{% url "profile" %}"><i class="fa fa-user"></i> Profile</a>
+									</li>
+									<li>
+										<a href="{% url "settings" %}"><i class="fa fa-gear"></i> Settings</a>
+									</li>
+									<li class="divider"></li>
+									<li>
+										<a href="{% url "logout" %}"><i class="fa fa-sign-out"></i> Logout</a>
+									</li>
+								</ul>
+							</li>
+						{% else %}
 						<li>
 							<a href="{% url "registration" %}"><i class="fa fa-user"></i> Sign in</a>
 						</li>
 						<li>
 							<a href="{% url "login" %}"><i class="fa fa-sign-in"></i> Log in</a>
 						</li>
+						{% endif %}
 					</ul>
 
 				</div>

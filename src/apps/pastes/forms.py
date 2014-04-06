@@ -10,7 +10,7 @@ from datetime import date, timedelta
 class PasteForm(forms.ModelForm):
    class Meta:
        model = Paste
-       fields = ['title', 'content', 'language', 'visibility']
+       fields = ['title', 'content', 'syntax', 'visibility']
        labels = { 'content' : 'New Paste'}
 
    EXPIRATION_CHOICES = (
@@ -19,6 +19,8 @@ class PasteForm(forms.ModelForm):
       ('10', '10 minutes'),
    )
 
+   
+   syntax = forms.ChoiceField(choices=Paste.SYNTAX_CHOICES)
    visibility = forms.ChoiceField(choices=Paste.VISIBILITY_CHOICES) 
    expiration = forms.ChoiceField(choices=EXPIRATION_CHOICES)
    
