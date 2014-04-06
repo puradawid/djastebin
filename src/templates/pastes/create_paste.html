@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% load widget_tweaks %}
+
+{% block title %}Create new paste{% endblock %}
+
+{% block content %}
+
+	<div class="well bs-component">
+		<form class="form-horizontal" method="POST"> {% csrf_token %}
+			<fieldset>
+				<legend>
+					{{form.content.label}}
+				</legend>
+				<div class="form-group">
+					{{form.content.errors}}
+					<div class="col-lg-12">
+						{{form.content|add_class:"form-control"|add_class:"no-resize"}}
+					</div>
+				</div>
+				<legend>
+					Settings
+				</legend>
+				<div class="form-group">
+					{{form.title.errors}}
+					<label for="inputEmail" class="col-lg-3 control-label">{{form.title.label}}:</label>
+					<div class="col-lg-3">
+					{{form.title|add_class:"form-control"}}
+					</div>
+				</div>
+				<div class="form-group">
+					{{form.syntax.errors}}
+					<label for="select" class="col-lg-3 control-label">{{form.syntax.label}}:</label>
+					<div class="col-lg-3">
+						{{form.syntax|add_class:"form-control"}}
+					</div>
+				</div>
+				<div class="form-group">
+					{{form.expiration.errors}}
+					<label for="select" class="col-lg-3 control-label">{{form.expiration.label}}:</label>
+					<div class="col-lg-3">
+						{{form.expiration|add_class:"form-control"}}
+					</div>
+				</div>
+				<div class="form-group">
+					{{form.visibility.errors}}
+					<label for="select" class="col-lg-3 control-label">{{form.visibility.label}}:</label>
+					<div class="col-lg-3">
+						{{form.visibility|add_class:"form-control"}}
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-lg-10 col-lg-offset-3">
+						<button type="submit" class="btn btn-primary">
+							Submit
+						</button>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+
+
+{% endblock %}
