@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load widget_tweaks %}
+
 {% block title %}Create new paste{% endblock %}
 
 {% block content %}
@@ -8,50 +10,38 @@
 		<form class="form-horizontal" method="POST"> {% csrf_token %}
 			<fieldset>
 				<legend>
-					New paste
+					{{form.content.label}}
 				</legend>
 				<div class="form-group">
 					<div class="col-lg-12">
-						<textarea class="form-control no-resize" rows="10" id="textArea" name="content"></textarea>
+						{{form.content|add_class:"form-control"|add_class:"no-resize"}}
 					</div>
 				</div>
 				<legend>
 					Settings
 				</legend>
 				<div class="form-group">
-					<label for="inputEmail" class="col-lg-3 control-label">Name:</label>
+					<label for="inputEmail" class="col-lg-3 control-label">{{form.title.label}}:</label>
 					<div class="col-lg-3">
-						<input type="text" class="form-control" placeholder="Paste name" name="name">
+					{{form.title|add_class:"form-control"}}
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="select" class="col-lg-3 control-label">Syntax highlighting:</label>
+					<label for="select" class="col-lg-3 control-label">{{form.syntax.label}}:</label>
 					<div class="col-lg-3">
-						<select class="form-control" id="select" name="syntax">
-							<option>None</option>
-							<option>Python</option>
-							<option>Java</option>
-						</select>
+						{{form.syntax|add_class:"form-control"}}
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="select" class="col-lg-3 control-label">Expiration:</label>
+					<label for="select" class="col-lg-3 control-label">{{form.expiration.label}}:</label>
 					<div class="col-lg-3">
-						<select class="form-control" id="select" name="expiration">
-							<option value="0" >Never</option>
-							<option value="10">10 minutes</option>
-							<option value="15">15 minutes</option>
-						</select>
+						{{form.expiration|add_class:"form-control"}}
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="select" class="col-lg-3 control-label">Visibility:</label>
+					<label for="select" class="col-lg-3 control-label">{{form.visibility.label}}:</label>
 					<div class="col-lg-3">
-						<select class="form-control" id="select" name="visibility">
-							<option>Public</option>
-							<option>Unlisted</option>
-							<option disabled="disabled">Pivate (only for members)</option>
-						</select>
+						{{form.visibility|add_class:"form-control"}}
 					</div>
 				</div>
 				<div class="form-group">
