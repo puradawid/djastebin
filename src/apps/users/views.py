@@ -3,6 +3,8 @@ from django.views.generic.base import View
 from apps.users.forms import ProfileEditForm, SettingsChangeForm
 from apps.pastes.models import Paste
 from django.views.generic.list import ListView
+from django.contrib.auth.models import User
+from django.http.response import HttpResponseRedirect
 
 # Create your views here.
 
