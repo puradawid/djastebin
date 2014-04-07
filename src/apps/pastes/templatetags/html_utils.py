@@ -16,7 +16,7 @@ def short_if(value, args):
     if args is None:
         return False
     arg_list = [arg.strip() for arg in args.split(',')]
-    print value
+
     if value == arg_list[0]:
         return arg_list[1]
     else:

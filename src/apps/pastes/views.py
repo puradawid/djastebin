@@ -10,8 +10,8 @@ from django.http.response import Http404
 from django.core.urlresolvers import reverse
 from braces.views import LoginRequiredMixin 
 from django.views.generic.list import ListView
-from django.utils.datetime_safe import datetime
 from datetime import timedelta
+from django.utils import timezone
 # Managing and displaying pastes views
 
 class CreatePasteView(CreateView):
@@ -60,11 +60,10 @@ class TrendingPastesView(ListView):
     paginate_by = 10
     
     def get_queryset(self):
-        
         if self.kwargs['days'] == 'all':
             return Paste.objects.filter(visibility='PUBLIC').order_by('-hits', '-created')
         days = int(self.kwargs['days'])
-        end_date = datetime.now()
+        end_date = timezone.now()
         start_date = end_date - timedelta(days=days)
         
         return Paste.objects.filter(visibility='PUBLIC', created__range=[start_date, end_date]).order_by('-hits', '-created')
