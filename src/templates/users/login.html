@@ -6,13 +6,7 @@
 {% load widget_tweaks %}
 	<div class="well bs-component">
 		<form method="post" class="form-horizontal">{% csrf_token %}
-			{% if form.non_field_errors %}
-				<div class="alert alert-dismissable alert-danger">
-					{% for error in form.non_field_errors %}
-						<p>{{ error | escape }}</p>
-					{% endfor %}
-				</div>
-			{% endif %}
+			{% include "danger_messages.html" with errors=form.non_field_errors %}
 			<fieldset>
 				<legend>
 					Login
@@ -23,9 +17,7 @@
 						<label for="{{ field.label_id }}" class="col-lg-3 control-label">{{ field.label }}</label>
 						<div class="col-lg-9">
 							{{ field | add_class:"form-control" }}
-							{% for error in field.errors %}
-					        <span class="help-block">{{ error|escape }}</span>
-					    {% endfor %}	
+							{% include "simple_messages.html" with errors=field.errors %}
 						</div>			
 					</div>
 				{% endfor %}
@@ -35,6 +27,7 @@
 						<button type="submit" class="btn btn-primary">
 							Submit
 						</button>
+						<input type="hidden" name="next" value="/" />
 					</div>
 				</div>
 			</fieldset>
