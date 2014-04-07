@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from mptt.models import MPTTModel, TreeForeignKey
 
 class Paste(models.Model):
     SYNTAX_CHOICES = (
@@ -27,12 +28,15 @@ class Paste(models.Model):
     def __unicode__(self):
         return self.title
     
-class Comment(models.Model):
-    created = models.DateTimeField(auto_now=True)
+class Comment(MPTTModel):
+    created = models.DateTimeField(auto_now_add=True)
     content = models.TextField()
     author = models.ForeignKey(User)
     paste = models.ForeignKey(Paste)
-    parent = models.ForeignKey('self', null=True, blank=True, default=None)
+    parent = TreeForeignKey('self', null=True, blank=True, related_name='children')
+    
+    class MPTTMeta:
+        order_insertion_by = ['created']
     
     def __unicode__(self):
         return self.date
