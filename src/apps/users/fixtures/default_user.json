@@ -12,7 +12,8 @@
 		"pk": "1",
 		"fields": {
 			"username": "default",
-			"password": "pbkdf2_sha256$12000$hCjC2d7FruC2$2Bb2HDkqi3cMR7RZtSbguGZr0gGCcQMjI5T1oocDSiw="
+			"password": "pbkdf2_sha256$12000$hCjC2d7FruC2$2Bb2HDkqi3cMR7RZtSbguGZr0gGCcQMjI5T1oocDSiw=",
+			"email": "default@example.com"
 		}
 	},
 	{
