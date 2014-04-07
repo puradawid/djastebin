@@ -14,7 +14,7 @@ class Paste(models.Model):
     )
     
     title = models.CharField(max_length=70, default='Untitled')
-    created = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
     content = models.TextField()
     hash = models.CharField(max_length=100) # Temporary length
     syntax = models.CharField(max_length=20, choices=SYNTAX_CHOICES)
@@ -26,6 +26,10 @@ class Paste(models.Model):
     
     def __unicode__(self):
         return self.title
+    
+    def get_absolute_url(self):
+        from django.core.urlresolvers import reverse
+        return reverse('show_paste', args=[str(self.pk)])
     
 class Comment(models.Model):
     created = models.DateTimeField(auto_now=True)
