@@ -24,9 +24,9 @@ class CreatePasteView(View):
 
 class ReadPasteView(View):
     def get(self, request, paste_id):
-        return render(request, 'home/index.html')
+        return render(request, 'pastes/paste.html')
     def post(self, request, paste_id):
-        return render(request, 'home/index.html')
+        return render(request, 'pastes/paste.html')
     
 class UpdatePasteView(View):
     def get(self, request, paste_id):
