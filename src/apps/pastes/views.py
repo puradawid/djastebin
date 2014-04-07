@@ -4,7 +4,7 @@
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 from django.views.generic import View
-from apps.pastes.models import Paste
+from apps.pastes.models import Paste, Comment
 from apps.pastes.forms import PasteForm
 
 # Managing and displaying pastes views
@@ -24,7 +24,7 @@ class CreatePasteView(View):
 
 class ReadPasteView(View):
     def get(self, request, paste_id):
-        return render(request, 'pastes/paste.html')
+        return render(request, 'pastes/paste.html', {'nodes': Comment.objects.all()})
     def post(self, request, paste_id):
         return render(request, 'pastes/paste.html')
     

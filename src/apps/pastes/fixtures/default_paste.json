@@ -1,0 +1,11 @@
+[
+	{
+		"model": "pastes.paste",
+		"pk": "1",
+		"fields": {
+			"content": "foo",
+			"syntax": "NONE",
+			"visibility": "PUBLIC"
+		}
+	}
+]

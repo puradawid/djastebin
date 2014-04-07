@@ -15,7 +15,7 @@ class Paste(models.Model):
     )
     
     title = models.CharField(max_length=70, default='Untitled')
-    created = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now=True, null=True, blank=True) # null for testing
     content = models.TextField()
     hash = models.CharField(max_length=100) # Temporary length
     syntax = models.CharField(max_length=20, choices=SYNTAX_CHOICES)
@@ -29,7 +29,7 @@ class Paste(models.Model):
         return self.title
     
 class Comment(MPTTModel):
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True, null=True, blank=True) # null for testing
     content = models.TextField()
     author = models.ForeignKey(User)
     paste = models.ForeignKey(Paste)
