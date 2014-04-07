@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.http.response import HttpResponseRedirect
 from django.contrib.auth.forms import AuthenticationForm
-
+from apps.users.models import Settings, Account
 
 # Create your views here.
 
