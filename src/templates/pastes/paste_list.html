@@ -10,7 +10,7 @@
 						<th>Added</th>
 						<th>Expires</th>
 						<th>Hits</th>
-						{% if enable_editing and paste.author == user %}
+						{% if enable_editing %}
 							<th>Edit</th>
 							<th>Delete</th>
 						{% endif %}
@@ -22,7 +22,7 @@
 						<tr>
 							<td><i class="fa {{ paste.visibility | visibility_convert }}"></i> <a href="{% url "show_paste" paste.pk %}">{{ paste.title }}</a></td>
 							<td>{{ paste.created | naturaltime }}</td>
-							<th>{{ paste.expire_date | naturaltime }}</th>
+							<th>{{ paste.expire_date | naturaltime | default_if_none:"Never" }}</th>
 							<td>{{ paste.hits }}</td>
 							{% if enable_editing and paste.author == user %}
 							<th><a href="{% url "update_paste" paste.pk %}">Edit</a></th>

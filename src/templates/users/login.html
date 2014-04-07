@@ -6,21 +6,13 @@
 {% load widget_tweaks %}
 	<div class="well bs-component">
 		<form method="post" class="form-horizontal">{% csrf_token %}
-			{% include "danger_messages.html" with errors=form.non_field_errors %}
+			{% include "messages.html" with messages=form.non_field_errors type='danger' %}
 			<fieldset>
 				<legend>
 					Login
 				</legend>
 				
-				{% for field in form %}
-					<div class="form-group{% if field.errors %} has-error{% endif %}">
-						<label for="{{ field.label_id }}" class="col-lg-3 control-label">{{ field.label }}</label>
-						<div class="col-lg-9">
-							{{ field | add_class:"form-control" }}
-							{% include "simple_messages.html" with errors=field.errors %}
-						</div>			
-					</div>
-				{% endfor %}
+				{% include "fields.html" with fields=form %}
 				
 				<div class="form-group">
 					<div class="col-lg-10 col-lg-offset-3">
