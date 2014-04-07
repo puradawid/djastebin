@@ -1,6 +1,9 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
 from apps.users.models import Settings, Account
+from apps.users.forms import ProfileForm
+from django import forms
+from django.forms.models import ModelForm
 
 class AccountTestCase(TestCase):
     
@@ -26,3 +29,33 @@ class AccountTestCase(TestCase):
         user = User.objects.get(username=self.username)
         self.assertEqual(user.account.settings.default_syntax, self.default_syntax)
         self.assertEqual(user.account.settings.default_visibility, self.default_visibility)
+        
+class ProfileFormTestCase(TestCase):
+        
+    def setUp(self):
+        user = User.objects.create_user(username='john@example.com', password='ExtremelyHardPassword', email='john@example.com')
+
+    def test_invalid_form(self):
+        "Submit invalid data"
+        
+        # Submit no data
+        form = ProfileForm()
+        self.assertFalse(form.is_valid())
+        
+        # Submit invalid data
+        data = { 'email': 'foo' }
+        form = ProfileForm(data=data)
+        self.assertFalse(form.is_valid())
+        
+        # Submit existing data (email)
+        data = { 'email': 'john@example.com' }
+        form = ProfileForm(data = data)
+        self.assertFalse(form.is_valid())
+        
+    def test_valid_form(self):
+        "Submit valid data"
+        
+        # Submit valid data
+        data = { 'email': 'johnny@example.com', 'first_name': 'John', 'last_name': 'Smith', 'password':  'ExtremelyHardPassword'}
+        form = ProfileForm(data = data)
+        self.assertTrue(form.is_valid())

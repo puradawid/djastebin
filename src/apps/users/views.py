@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
-from apps.users.forms import UserRegistrationForm
+from apps.users.forms import UserRegistrationForm, ProfileForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from django.http.response import HttpResponseRedirect
 from django.contrib.auth.forms import AuthenticationForm
+
 
 # Create your views here.
 
@@ -20,10 +22,27 @@ class SettingsView(View):
         return render(request, 'users/user.html', {'user_name' : 'settings_post'})
 
 class ProfileView(View):
-    def get(self, request, user_name):
-        return render(request, 'users/user.html', {'user_name' : 'profile'})
-    def post(self, request, user_name):
-        return render(request, 'users/user.html', {'user_name' : 'profile'})
+    SUCCESS_SESSION_KEY = 'profile_edit_success'
+    
+    def get(self, request):
+        success = None
+        if self.SUCCESS_SESSION_KEY in request.session:
+            success = request.session[self.SUCCESS_SESSION_KEY]
+            del request.session[self.SUCCESS_SESSION_KEY]
+        return render(request, 'users/profile.html', {'form' : ProfileForm(instance=request.user), 'success': success})
+    def post(self, request):
+        user = request.user
+        form = ProfileForm(request.POST, instance=user)
+        if (form.is_valid()):
+            email = form.clean_email()
+            first_name = form.clean_first_name()
+            last_name = form.clean_last_name()
+            password = form.clean_password()
+            form.save()
+            if self.SUCCESS_SESSION_KEY not in request.session:
+                request.session[self.SUCCESS_SESSION_KEY] = 'Your profile has been updated!'
+            return HttpResponseRedirect("/profile")
+        return render(request, 'users/profile.html', {'form' : form})
 
 class LoginView(View):
     def get(self, request):
