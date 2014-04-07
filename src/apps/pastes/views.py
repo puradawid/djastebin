@@ -1,44 +1,55 @@
 # ./apps/pastes/views.py
 
 # Django imports
-from django.shortcuts import render, redirect
-from django.core.urlresolvers import reverse
+from django.shortcuts import render
 from django.views.generic import View
 from apps.pastes.models import Paste
-from apps.pastes.forms import PasteForm
-
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from apps.pastes import forms
+from django.http.response import Http404
+from django.core.urlresolvers import reverse
+from braces.views import LoginRequiredMixin 
 # Managing and displaying pastes views
 
-class CreatePasteView(View):
-
-    def get(self, request):
-	form = PasteForm()
-        return render(request, 'pastes/create_paste.html', {'form' : form })
-
-    def post(self, request):
-	form = PasteForm(request.POST) 	
-	if form.is_valid():
-		paste = form.save()
-		return redirect(reverse('paste_id', args=[paste.id])) 
-	return render(request, 'pastes/create_paste.html', {'form' : form })
+class CreatePasteView(CreateView):
+    model = Paste
+    template_name = 'pastes/modify_paste.html'
+    form_class = forms.PasteForm
+    
+    def form_valid(self, form):
+        if self.request.user.is_authenticated():
+            form.instance.author = self.request.user
+        return super(CreatePasteView, self).form_valid(form)
 
 class ReadPasteView(View):
-    def get(self, request, paste_id):
+    def get(self, request, pk):
         return render(request, 'home/index.html')
-    def post(self, request, paste_id):
+    def post(self, request, pk):
         return render(request, 'home/index.html')
+
+class UpdatePasteView(LoginRequiredMixin, UpdateView):
+    model = Paste
+    template_name = 'pastes/modify_paste.html'
+    form_class = forms.PasteFormEdit
     
-class UpdatePasteView(View):
-    def get(self, request, paste_id):
-        return render(request, 'home/index.html')
-    def post(self, request, paste_id):
-        return render(request, 'home/index.html')
+    def get_object(self, *args, **kwargs):
+        obj = super(UpdatePasteView, self).get_object(*args, **kwargs)
+        if not obj.author == self.request.user:
+            raise Http404
+        return obj
     
-class DeletePasteView(View):
-    def get(self, request, paste_id):
-        return render(request, 'home/index.html')
-    def post(self, request, paste_id):
-        return render(request, 'home/index.html')
+class DeletePasteView(LoginRequiredMixin, DeleteView):
+    model = Paste
+    template_name = 'pastes/delete_paste.html'
+    
+    def get_object(self, *args, **kwargs):
+        obj = super(UpdatePasteView, self).get_object(*args, **kwargs)
+        if not obj.author == self.request.user:
+            raise Http404
+        return obj
+
+    def get_success_url(self):
+        return reverse('user', args=[self.request.user.username])
     
 class TrendingPastesView(View):
     def get(self, request, paste_id):

@@ -2,51 +2,62 @@
 
 {% load widget_tweaks %}
 
-{% block title %}Create new paste{% endblock %}
+{% block title %}
+{% if form.instance.pk %}
+Edit paste
+{% else %}
+Create new paste
+{% endif %}
+{% endblock %}
 
 {% block content %}
 
 	<div class="well bs-component">
 		<form class="form-horizontal" method="POST"> {% csrf_token %}
+			{% include "danger_messages.html" with errors=form.non_field_errors %}
 			<fieldset>
 				<legend>
-					{{form.content.label}}
+					{% if form.instance.pk %}
+						Edit Paste: {{form.title.value}}
+					{% else %}
+						New paste
+					{% endif %}
 				</legend>
 				<div class="form-group">
-					{{form.content.errors}}
 					<div class="col-lg-12">
 						{{form.content|add_class:"form-control"|add_class:"no-resize"}}
+						{% include "simple_messages.html" with errors=form.content.errors %}
 					</div>
 				</div>
 				<legend>
 					Settings
 				</legend>
 				<div class="form-group">
-					{{form.title.errors}}
 					<label for="inputEmail" class="col-lg-3 control-label">{{form.title.label}}:</label>
 					<div class="col-lg-3">
-					{{form.title|add_class:"form-control"}}
+						{{form.title|add_class:"form-control"}}
+						{% include "simple_messages.html" with errors=form.title.errors %}
 					</div>
 				</div>
 				<div class="form-group">
-					{{form.syntax.errors}}
 					<label for="select" class="col-lg-3 control-label">{{form.syntax.label}}:</label>
 					<div class="col-lg-3">
 						{{form.syntax|add_class:"form-control"}}
+						{% include "simple_messages.html" with errors=form.syntax.errors %}
 					</div>
 				</div>
 				<div class="form-group">
-					{{form.expiration.errors}}
 					<label for="select" class="col-lg-3 control-label">{{form.expiration.label}}:</label>
 					<div class="col-lg-3">
 						{{form.expiration|add_class:"form-control"}}
+						{% include "simple_messages.html" with errors=form.expiration.errors %}
 					</div>
 				</div>
 				<div class="form-group">
-					{{form.visibility.errors}}
 					<label for="select" class="col-lg-3 control-label">{{form.visibility.label}}:</label>
 					<div class="col-lg-3">
 						{{form.visibility|add_class:"form-control"}}
+						{% include "simple_messages.html" with errors=form.visibility.errors %}
 					</div>
 				</div>
 				<div class="form-group">
