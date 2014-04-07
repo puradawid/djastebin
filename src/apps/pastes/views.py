@@ -9,6 +9,9 @@ from apps.pastes import forms
 from django.http.response import Http404
 from django.core.urlresolvers import reverse
 from braces.views import LoginRequiredMixin 
+from django.views.generic.list import ListView
+from django.utils.datetime_safe import datetime
+from datetime import timedelta
 # Managing and displaying pastes views
 
 class CreatePasteView(CreateView):
@@ -51,8 +54,24 @@ class DeletePasteView(LoginRequiredMixin, DeleteView):
     def get_success_url(self):
         return reverse('user', args=[self.request.user.username])
     
-class TrendingPastesView(View):
-    def get(self, request, paste_id):
-        return render(request, 'home/index.html')
-    def post(self, request, paste_id):
-        return render(request, 'home/index.html')
+class TrendingPastesView(ListView):
+    template_name = 'pastes/trends.html'
+    context_object_name = 'paste_list'
+    paginate_by = 10
+    
+    def get_queryset(self):
+        
+        if self.kwargs['days'] == 'all':
+            return Paste.objects.filter(visibility='PUBLIC').order_by('-hits', '-created')
+        days = int(self.kwargs['days'])
+        end_date = datetime.now()
+        start_date = end_date - timedelta(days=days)
+        
+        return Paste.objects.filter(visibility='PUBLIC', created__range=[start_date, end_date]).order_by('-hits', '-created')
+
+    def get_context_data(self, **kwargs):
+        context = super(TrendingPastesView, self).get_context_data(**kwargs)
+        context.update({
+            'days': self.kwargs['days'],
+        })
+        return context

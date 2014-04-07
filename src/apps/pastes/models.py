@@ -18,7 +18,7 @@ class Paste(models.Model):
     content = models.TextField()
     hash = models.CharField(max_length=100) # Temporary length
     syntax = models.CharField(max_length=20, choices=SYNTAX_CHOICES)
-    visibility = models.CharField(max_length=7, choices=VISIBILITY_CHOICES)
+    visibility = models.CharField(max_length=8, choices=VISIBILITY_CHOICES)
     expire_date = models.DateTimeField(null=True, blank=True, default=None)
     hits = models.IntegerField(default=0)
     size = models.FloatField(default=0.00)
