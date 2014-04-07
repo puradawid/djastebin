@@ -14,10 +14,10 @@ import apps.users.views
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^settings/$', login_required(apps.users.views.SettingsView.as_view()), name='settings'),
-    url(r'^profile/$', login_required(apps.users.views.ProfileView.as_view()), name='profile'),
+    url(r'^profile/$', apps.users.views.ProfileView.as_view(), name='profile'),
     url(r'^login/$', anonymous_required(django.contrib.auth.views.login), {'template_name': 'users/login.html'}, name='login'),
     url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}, name='logout'),
-    url('^registration/$', anonymous_required(CreateView.as_view(
+    url(r'^registration/$', anonymous_required(CreateView.as_view(
             template_name='users/registration.html',
             form_class=UserRegistrationForm,
             success_url='/login/'

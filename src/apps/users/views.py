@@ -5,6 +5,10 @@ from apps.pastes.models import Paste
 from django.views.generic.list import ListView
 from django.contrib.auth.models import User
 from django.http.response import HttpResponseRedirect
+from django.views.generic.edit import UpdateView
+from django.contrib.messages.views import SuccessMessageMixin
+from braces.views._access import LoginRequiredMixin
+from django.core.urlresolvers import reverse
 
 # Create your views here.
 
@@ -55,25 +59,15 @@ class SettingsView(View):
                 return HttpResponseRedirect('/settings')
         return render(request, 'users/settings.html', {'form': form})
 
-class ProfileView(View):
-    SUCCESS_SESSION_KEY = 'profile_edit_success'
+class ProfileView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = User
+    template_name = 'users/profile.html'
+    form_class = ProfileEditForm
+    success_url = '/profile/'
+    success_message = 'Your profile has been updated!'
     
-    def get(self, request):
-        success = None
-        if self.SUCCESS_SESSION_KEY in request.session:
-            success = request.session[self.SUCCESS_SESSION_KEY]
-            del request.session[self.SUCCESS_SESSION_KEY]
-        return render(request, 'users/profile.html', {'form' : ProfileEditForm(instance=request.user), 'success': success})
-    def post(self, request):
-        user = request.user
-        form = ProfileEditForm(request.POST, instance=user)
-        if form.is_valid():
-            email = form.clean_email()
-            first_name = form.clean_first_name()
-            last_name = form.clean_last_name()
-            password = form.clean_password()
-            form.save()
-            if self.SUCCESS_SESSION_KEY not in request.session:
-                request.session[self.SUCCESS_SESSION_KEY] = 'Your profile has been updated!'
-            return HttpResponseRedirect("/profile")
-        return render(request, 'users/profile.html', {'form' : form})
+    def get_object(self, *args, **kwargs):
+        return self.request.user;
+    
+    def get_success_url(self):
+        return reverse('profile')
