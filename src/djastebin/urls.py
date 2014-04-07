@@ -18,7 +18,7 @@ urlpatterns = patterns('',
     url(r'^login/$', anonymous_required(django.contrib.auth.views.login), {'template_name': 'users/login.html'}, name='login'),
     url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}, name='logout'),
     url('^registration/$', anonymous_required(CreateView.as_view(
-            template_name='register.html',
+            template_name='users/registration.html',
             form_class=UserRegistrationForm,
             success_url='/'
     )), name='registration'),
