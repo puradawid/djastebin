@@ -48,14 +48,6 @@ class ProfileEditForm(ModelForm):
             raise forms.ValidationError("That email is already in use")
         return email
     
-    def clean_first_name(self):
-        first_name = self.cleaned_data['first_name']
-        return first_name
-    
-    def clean_last_name(self):
-        last_name = self.cleaned_data['last_name']
-        return last_name
-    
     def clean_password(self):
         password = self.cleaned_data['password']
         if len(password) == 0:

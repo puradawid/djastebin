@@ -1,0 +1,7 @@
+{% if messages %}
+	<div class="alert alert-dismissable alert-{{ type }}">
+		{% for message in messages %}
+			<p>{{ message | escape }}</p>
+		{% endfor %}
+	</div>
+{% endif %}

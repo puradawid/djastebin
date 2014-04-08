@@ -1,23 +1,21 @@
 {% extends 'base.html' %}
 
-{% block title %}Registration{% endblock %}
+{% block title %}Delete paste{% endblock %}
 
 {% block content %}
-
+{% load widget_tweaks %}
 	<div class="well bs-component">
 		<form method="post" class="form-horizontal">{% csrf_token %}
-			{% include "messages.html" with messages=form.non_field_errors type='danger' %}
 			<fieldset>
 				<legend>
-					Sign in
+					Delete paste
 				</legend>
-				
-				{% include "fields.html" with fields=form %}
+				<p>Are you sure you want to delete "{{ object }}"?</p>
 				
 				<div class="form-group">
-					<div class="col-lg-10 col-lg-offset-3">
-						<button type="submit" class="btn btn-primary">
-							Submit
+					<div class="col-lg-10">
+						<button type="submit" class="btn btn-danger">
+							Yes
 						</button>
 					</div>
 				</div>

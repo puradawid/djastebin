@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load widget_tweaks %}
+{% load humanize %}
+
+{% block title %}{{ user_profile.username }}'s Djastebin{% endblock %}
+
+{% block content %}
+
+<div class="bs-docs-section">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="page-header no-margin-top">
+				<h3 class="no-margin-top">{{ user_profile.username }}</h3>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<p>Joined: {{ user_profile.date_joined | naturaltime }} | Total pastes: {{ total_pastes }}</p>
+		</div>
+	</div>
+	{% include "pastes/paste_list.html" with enable_editing=True %}
+</div>
+
+{% endblock %}
