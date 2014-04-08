@@ -6,7 +6,8 @@ from django.views.generic import View
 from apps.pastes.models import Paste
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from apps.pastes import forms
-from django.http.response import Http404
+from django.http.response import Http404 
+from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from braces.views import LoginRequiredMixin 
 from django.views.generic.list import ListView
@@ -39,7 +40,10 @@ class ShowPasteCreateCommentView(CreateView):
         origin = Paste.objects.get(id=self.kwargs['pk'])
         context = super(CreateView, self).get_context_data(**kwargs)
 	context['paste'] = origin
-	return context
+	if origin.visibility == 'PRIVATE':
+           if not origin.author == self.request.user:
+              raise PermissionDenied
+        return context
 
 class UpdatePasteView(LoginRequiredMixin, UpdateView):
     model = Paste
