@@ -14,7 +14,7 @@ class PasteForm(forms.ModelForm):
     class Meta:
         model = Paste
         fields = ['title', 'content', 'syntax', 'visibility']
-
+        
     syntax = forms.ChoiceField(choices=Paste.SYNTAX_CHOICES)
     visibility = forms.ChoiceField(choices=Paste.VISIBILITY_CHOICES) 
     expiration = forms.ChoiceField(choices=Settings.EXPIRATION_CHOICES)

@@ -32,7 +32,6 @@ class Paste(models.Model):
     def __unicode__(self):
         return self.title
     
-
 class Comment(MPTTModel):
     created = models.DateTimeField(auto_now=True)
     content = models.TextField()
