@@ -1,8 +1,6 @@
 # ./apps/pastes/views.py
 
 # Django imports
-from django.shortcuts import render
-from django.views.generic import View
 from apps.pastes.models import Paste, Comment
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from apps.pastes import forms
@@ -55,7 +53,7 @@ class DeletePasteView(LoginRequiredMixin, DeleteView):
     template_name = 'pastes/delete_paste.html'
     
     def get_object(self, *args, **kwargs):
-        obj = super(UpdatePasteView, self).get_object(*args, **kwargs)
+        obj = super(DeletePasteView, self).get_object(*args, **kwargs)
         if not obj.author == self.request.user:
             raise Http404
         return obj

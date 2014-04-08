@@ -4,7 +4,7 @@ from apps.users.forms import ProfileEditForm, SettingsChangeForm
 from apps.pastes.models import Paste
 from django.views.generic.list import ListView
 from django.contrib.auth.models import User
-from django.http.response import HttpResponseRedirect
+from django.http.response import HttpResponseRedirect, Http404
 from django.views.generic.edit import UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
 from braces.views._access import LoginRequiredMixin
@@ -19,6 +19,12 @@ class UserDetailsView(ListView):
     paginate_by = 10
     
     def get_queryset(self):
+        
+        try:
+            self.user_profile = User.objects.get(username=self.kwargs['user_name'])
+        except User.DoesNotExist:
+            raise Http404
+        
         if self.request.user.is_authenticated(): 
             return Paste.objects.filter(author=self.user_profile).order_by('-created')
         return Paste.objects.filter(author=self.user_profile, visibility='PUBLIC').order_by('-created')
@@ -30,13 +36,6 @@ class UserDetailsView(ListView):
             'total_pastes': self.get_queryset().count(),
         })
         return context
-    
-    def get(self, *args, **kwargs):
-        try:
-            self.user_profile = User.objects.get(username=kwargs['user_name'])
-        except User.DoesNotExist:
-            return HttpResponseRedirect("/")
-        return super(UserDetailsView, self).get(*args, **kwargs);
 
 class SettingsView(View):
     SUCCESS_SESSION_KEY = 'settings_change_success'

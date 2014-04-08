@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Password recovery{% endblock %}
+
+{% block content %}
+
+	<div class="well bs-component">
+		<legend>
+			Password recovery sent
+		</legend>
+		<div class="alert alert-success">
+			An email was sent to <strong>{{ email }}</strong>. Use the link in it to set a new password.
+		</div>
+	</div>
+	
+{% endblock %}
