@@ -10,6 +10,7 @@ from braces.views import LoginRequiredMixin
 from django.views.generic.list import ListView
 from datetime import timedelta
 from django.utils import timezone
+from django.forms.models import model_to_dict
 # Managing and displaying pastes views
 
 class CreatePasteView(CreateView):
@@ -21,6 +22,11 @@ class CreatePasteView(CreateView):
         if self.request.user.is_authenticated():
             form.instance.author = self.request.user
         return super(CreatePasteView, self).form_valid(form)
+    
+    def get_initial(self):
+        if self.request.user.is_authenticated():
+            return model_to_dict(self.request.user.account.settings)
+        return super(CreatePasteView, self).get_initial()
 
 class ReadPasteView(CreateView):
     template_name = 'pastes/paste.html'
