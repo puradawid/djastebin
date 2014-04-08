@@ -17,3 +17,7 @@ def syntax_highlight(text, language):
     if language != 'NONE':
         return highlight(text, get_lexer_by_name(language.lower()), HtmlFormatter())
     return '<pre>' + text + '</pre>'
+
+@register.filter
+def get_css(text):
+	return HtmlFormatter().get_style_defs("pre")

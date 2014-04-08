@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 
 {% load widget_tweaks %}
+{% load syntax_highlighting %}
 
 {% block title %}Paste{% endblock %}
 
 {% block content %}
-
+	<style> {{""|get_css}} </style>
 	<div class="bs-docs-section">
 		<div class="row">
 			<div class="col-lg-12">
@@ -16,9 +17,10 @@
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
-				{{paste.content}}
+				{% autoescape off %}
+				{{paste.content|syntax_highlight:paste.syntax}}
+				{% endautoescape %}
 			</div>
 		</div>
 		{% include "pastes/comments.html" %}
-
-	{% endblock %}
+{% endblock %}
