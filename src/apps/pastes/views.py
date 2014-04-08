@@ -37,7 +37,7 @@ class ShowPasteCreateCommentView(CreateView):
 	return super(ShowPasteCreateCommentView, self).valid_form(form)
 
     def get_context_data(self, **kwargs):
-        origin = Paste.objects.get(id=self.kwargs['pk'])
+        origin = Paste.objects.get(pk=self.kwargs['pk'])
         context = super(CreateView, self).get_context_data(**kwargs)
 	context['paste'] = origin
 	if origin.visibility == 'PRIVATE':
