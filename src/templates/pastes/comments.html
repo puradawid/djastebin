@@ -9,15 +9,18 @@
 {% load html_utils %}
 {% load mptt_tags %}
 {% load humanize %}
-
+{% load widget_tweaks %}
+<section id="comments_tree">
 {% recursetree nodes %}
-	<div class="row">
+
+	<div class="row comment-row">
 		<div class='col-lg-{{ "12"|subtract:node.level }} col-lg-offset-{{ node.level }}'>
 			<div class="well col-lg-12">
 				<p>
+					<span class="comment-id"><a href="#">#{{ node.id }}</a></span>
 					<span class="comment-author"><a href="#">{{ node.author.username }}</a></span>
 					<span class="comment-date">{{ node.created|naturaltime }}</span>
-					<span class="comment-reply"><a href="#">reply</a></span>
+					<span class="comment-reply"><a href="#" id="node_{{ node.id }}">reply</a></span>
 				</p>
 				{{ node.content }}
 			</div>
@@ -29,4 +32,46 @@
 	{% endif %}
 
 {% endrecursetree %}
+</section>
 
+	<div class="well bs-component col-lg-12" id="comment_form">
+		<form class="form-horizontal" method="post">{% csrf_token %}
+			<fieldset>
+				{% if form.non_field_errors %}
+				<div class="alert alert-dismissable alert-danger">
+					{% for error in form.non_field_errors %}
+						<p>{{ error | escape }}</p>
+					{% endfor %}
+				</div>
+				{% endif %}
+				
+				{% if success and success.strip %}
+				<div class="alert alert-dismissable alert-success">
+            		<p>{{ success }}</p>
+          		</div>
+				{% endif %}
+				
+				<legend>
+					Add new comment
+				</legend>
+				{% for field in form %}
+					<div class="form-group{% if field.errors %} has-error{% endif %}">
+						<div class="col-lg-12">
+							{{ field | add_class:"form-control" }}
+							{% for error in field.errors %}
+					      		 <span class="help-block">{{ error|escape }}</span>
+					   	 	{% endfor %}
+						</div>
+					</div>
+				{% endfor %}
+				<div class="form-group">
+					<div class="col-lg-10 col-lg-offset-0">
+						<button id="comment_submit" type="submit" class="btn btn-primary">
+							Submit
+						</button>
+						<a href="#" id="cancel_reply">Cancel</a>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</div>

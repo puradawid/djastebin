@@ -37,7 +37,4 @@ class Comment(MPTTModel):
     
     class MPTTMeta:
         order_insertion_by = ['created']
-    
-    def __unicode__(self):
-        return self.date
 

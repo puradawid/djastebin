@@ -2,10 +2,11 @@
 
 # Django imports
 from django import forms
-from apps.pastes.models import Paste
+from apps.pastes.models import Paste, Comment
 
 # Utilities import
 from datetime import date, timedelta
+from django.forms.models import ModelForm
 
 class PasteForm(forms.ModelForm):
    class Meta:
@@ -34,4 +35,11 @@ class PasteForm(forms.ModelForm):
        result.save()
        return result
 
-
+class CommentForm(ModelForm):
+    parent = forms.CharField(widget = forms.HiddenInput())
+    content = forms.CharField(required=True, widget=forms.Textarea(attrs={'rows': 3}))
+    
+    class Meta:
+        model = Comment
+        fields = ['content', 'parent']
+        
