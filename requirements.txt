@@ -6,7 +6,4 @@ wsgiref==0.1.2
 django-cron==0.3.3
 django-widget-tweaks==1.3
 django-braces==1.4.0
-<<<<<<< HEAD
 django-mptt=0.6.0
-=======
->>>>>>> 1a0738a7cd148ca1159689d063d07dd35a322283

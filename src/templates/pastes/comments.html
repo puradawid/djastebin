@@ -23,8 +23,10 @@
 					<span class="comment-id"><a href="#">#{{ node.pk }}</a></span>
 					<span class="comment-author"><a href='{% url "user" node.author.username %}'>{{ node.author.username }}</a></span>
 					<span class="comment-date">{{ node.created|naturaltime }}</span>
+					{% if user.is_authenticated %}
 					{% if node.level < 3 %}
 					<span class="comment-reply"><a href="#" id="node_{{ node.pk }}">reply</a></span>
+					{% endif %}
 					{% endif %}
 				</p>
 				{{ node.content }}
@@ -40,6 +42,7 @@
 	{% endif %}
 </section>
 
+{% if user.is_authenticated %}
 <div class="well bs-component col-lg-12" id="comment_form">
 	<form class="form-horizontal" method="post">
 		{% csrf_token %}
@@ -86,3 +89,4 @@
 		</fieldset>
 	</form>
 </div>
+{% endif %}
