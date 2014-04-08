@@ -7,35 +7,15 @@
 	<div class="well bs-component">
 		<form class="form-horizontal" method="post">{% csrf_token %}
 			<fieldset>
-				{% if form.non_field_errors %}
-				<div class="alert alert-dismissable alert-danger">
-					{% for error in form.non_field_errors %}
-						<p>{{ error | escape }}</p>
-					{% endfor %}
-				</div>
-				{% endif %}
-				
-				{% if success and success.strip %}
-				<div class="alert alert-dismissable alert-success">
-            		<p>{{ success }}</p>
-          		</div>
-				{% endif %}
+				{% include "messages.html" with messages=form.non_field_errors type='danger' %}
+				{% include "messages.html" with messages=messages type='success' %}
 				
 				<legend>
 					Edit profile
 				</legend>
 				
-				{% for field in form %}
-					<div class="form-group{% if field.errors %} has-error{% endif %}">
-						<label for="{{ field.label_id }}" class="col-lg-2 control-label">{{ field.label }}</label>
-						<div class="col-lg-10">
-							{{ field | add_class:"form-control" }}
-							{% for error in field.errors %}
-					      		 <span class="help-block">{{ error|escape }}</span>
-					   	 	{% endfor %}
-						</div>
-					</div>
-				{% endfor %}
+				{% include "fields.html" with fields=form %}
+				
 				<div class="form-group">
 					<div class="col-lg-10 col-lg-offset-2">
 						<button type="submit" class="btn btn-primary">

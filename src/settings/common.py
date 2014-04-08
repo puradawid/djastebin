@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     ##### Third party apps #####
     'django_cron',
     'widget_tweaks',
+    'mptt',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -58,6 +59,7 @@ MIDDLEWARE_CLASSES = (
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
+    'django.contrib.messages.context_processors.messages',
     'djastebin.context_processors.recent_pastes',
 )
 
@@ -91,6 +93,8 @@ USE_TZ = True
 LOGIN_URL = '/login/'
 
 LOGOUT_URL = '/logout/'
+
+LOGIN_REDIRECT_URL = '/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
