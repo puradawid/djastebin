@@ -3,11 +3,11 @@
 {% load widget_tweaks %}
 
 {% block title %}
-{% if form.instance.pk %}
-Edit paste
-{% else %}
-Create new paste
-{% endif %}
+	{% if form.instance.pk %}
+		Edit paste
+	{% else %}
+		Create new paste
+	{% endif %}
 {% endblock %}
 
 {% block content %}
