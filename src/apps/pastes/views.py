@@ -46,7 +46,7 @@ class DeletePasteView(LoginRequiredMixin, DeleteView):
     template_name = 'pastes/delete_paste.html'
     
     def get_object(self, *args, **kwargs):
-        obj = super(UpdatePasteView, self).get_object(*args, **kwargs)
+        obj = super(DeletePasteView, self).get_object(*args, **kwargs)
         if not obj.author == self.request.user:
             raise Http404
         return obj

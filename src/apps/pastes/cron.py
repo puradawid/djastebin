@@ -1,6 +1,6 @@
 from django_cron import CronJobBase, Schedule
 from django.utils import timezone
-from apps.paste.models import Paste
+from apps.pastes.models import Paste
 
 class ClearExpiredPastesJob(CronJobBase):
     """
