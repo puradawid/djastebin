@@ -4,7 +4,8 @@
 from apps.pastes.models import Paste, Comment
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from apps.pastes import forms
-from django.http.response import Http404
+from django.http.response import Http404 
+from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from braces.views import LoginRequiredMixin 
 from django.views.generic.list import ListView
@@ -34,7 +35,12 @@ class ReadPasteView(CreateView):
     success_url = '.'
     
     def get_context_data(self, **kwargs):
+        origin = Paste.objects.get(pk=self.kwargs['pk'])
         context = super(ReadPasteView, self).get_context_data(**kwargs)
+ 	context['paste'] = origin
+	if origin.visibility == 'PRIVATE':
+           if not origin.author == self.request.user:
+              raise PermissionDenied       
         context['nodes'] = Comment.objects.filter(paste=Paste.objects.get(pk=self.kwargs['pk']))
         return context
     
