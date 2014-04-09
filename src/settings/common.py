@@ -76,6 +76,7 @@ WSGI_APPLICATION = 'djastebin.wsgi.application'
 
 AUTHENTICATION_BACKENDS = (
     'social_auth.backends.facebook.FacebookBackend',
+    'social_auth.backends.google.GoogleOAuth2Backend',
 )
 
 SOCIAL_AUTH_DEFAULT_USERNAME = 'new_social_auth_user'
@@ -85,7 +86,7 @@ SOCIAL_AUTH_NONCE_SERVER_URL_LENGTH = 16
 SOCIAL_AUTH_ASSOCIATION_SERVER_URL_LENGTH = 16
 SOCIAL_AUTH_ASSOCIATION_HANDLE_LENGTH = 16
 
-SOCIAL_AUTH_ENABLED_BACKENDS = ('facebook')
+SOCIAL_AUTH_ENABLED_BACKENDS = ('facebook', 'google')
 
 SESSION_SERIALIZER='django.contrib.sessions.serializers.PickleSerializer'
 
@@ -95,6 +96,9 @@ FACEBOOK_API_SECRET='704b5ed4e7247b42384010205d7022ff'
 
 FACEBOOK_EXTENDED_PERMISSIONS = ['email']
 
+# Google app settings
+GOOGLE_OAUTH2_CLIENT_ID = '645877344566-5eu9rb7do6dqen2fses7lv77tcovc9mh.apps.googleusercontent.com'
+GOOGLE_OAUTH2_CLIENT_SECRET = 'IBGIuIZYTio-4oZyFJYd9wc1'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases

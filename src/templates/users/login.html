@@ -12,7 +12,7 @@
 				<legend>
 					Login
 				</legend>
-				<div class="col-lg-6">
+				<div class="col-lg-8">
 					{% include "fields.html" with fields=form %}
 					<div class="form-group">
 						<div class="col-lg-9 col-lg-offset-3">
@@ -24,9 +24,10 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-6">
+				<div class="col-lg-4">
 					<p>Use your existing account from...</p>
 					<p><a href="{% url 'socialauth_begin' 'facebook' %}"><img src="{% static 'images/fb-login.png' %}" alt="Login with facebook" /></a></p>
+					<p><a href="{% url 'socialauth_begin' 'google-oauth2' %}"><img src="{% static 'images/google-login.png' %}" alt="Login with google" /></a></p>
 				</div>
 				
 			</fieldset>
