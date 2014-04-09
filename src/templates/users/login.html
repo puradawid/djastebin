@@ -15,10 +15,11 @@
 				{% include "fields.html" with fields=form %}
 				
 				<div class="form-group">
-					<div class="col-lg-10 col-lg-offset-3">
+					<div class="col-lg-1 col-lg-offset-3">
 						<button type="submit" class="btn btn-primary">
 							Submit
 						</button>
+						<a href="{% url "password_reset_recover" %}" class="btn btn-default">Forgot password?</a>
 						<input type="hidden" name="next" value="/" />
 					</div>
 				</div>

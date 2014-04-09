@@ -46,6 +46,7 @@ INSTALLED_APPS = (
     'django_cron',
     'widget_tweaks',
     'mptt',
+    'password_reset',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -90,14 +91,13 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Url configuration
+
 LOGIN_URL = '/login/'
 
 LOGOUT_URL = '/logout/'
 
 LOGIN_REDIRECT_URL = '/'
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
 
@@ -113,6 +113,17 @@ TEMPLATE_DIRS = (
      TEMPLATE_PATH,
 )
 
-CRON_CLASSES = [
+CRON_CLASSES = (
     "apps.paste.cron.ClearExpiredPastesJob",
-]
+)
+
+# Email configuration
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'djastebin'
+EMAIL_HOST_PASSWORD = 'korwinkrul'
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+SERVER_EMAIL = EMAIL_HOST_USER

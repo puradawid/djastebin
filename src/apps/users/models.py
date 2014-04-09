@@ -12,9 +12,9 @@ class Settings(models.Model):
       ('10', '10 minutes'),
     )
     
-    default_visibility =  models.CharField(max_length=8, choices=Paste.VISIBILITY_CHOICES, default=(Paste.VISIBILITY_CHOICES[0])[0])
-    default_syntax = models.CharField(max_length=20, choices=Paste.SYNTAX_CHOICES, default=(Paste.SYNTAX_CHOICES[0])[0])
-    default_expiration = models.CharField(max_length=2, choices=EXPIRATION_CHOICES, default=(EXPIRATION_CHOICES[0])[0])
+    visibility =  models.CharField(max_length=8, choices=Paste.VISIBILITY_CHOICES, default=(Paste.VISIBILITY_CHOICES[0])[0])
+    syntax = models.CharField(max_length=20, choices=Paste.SYNTAX_CHOICES, default=(Paste.SYNTAX_CHOICES[0])[0])
+    expiration = models.CharField(max_length=2, choices=EXPIRATION_CHOICES, default=(EXPIRATION_CHOICES[0])[0])
     
 class Account(models.Model):
     user = models.OneToOneField(User)

@@ -57,22 +57,5 @@ class ProfileEditForm(ModelForm):
         return password
     
 class SettingsChangeForm(ModelForm):
-    default_syntax = forms.ChoiceField(choices=Paste.SYNTAX_CHOICES)
-    default_visibility = forms.ChoiceField(choices=Paste.VISIBILITY_CHOICES)
-    default_expiration = forms.ChoiceField(choices=Settings.EXPIRATION_CHOICES)
-    
     class Meta:
         model = Settings
-        fiels = ['default_syntax', 'default_visibility', 'default_expiration']
-        
-    def clean_default_syntax(self):
-        default_syntax = self.cleaned_data['default_syntax']
-        return default_syntax
-    
-    def clean_default_visibility(self):
-        default_visibility = self.cleaned_data['default_visibility']
-        return default_visibility
-    
-    def clean_default_expiration(self):
-        default_expiration = self.cleaned_data['default_expiration']
-        return default_expiration

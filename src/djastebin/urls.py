@@ -5,11 +5,11 @@ from django_common.decorators import anonymous_required
 import django.contrib.auth.views
 from django.views.generic.edit import CreateView
 from apps.users.forms import UserRegistrationForm
+from django.views.generic.base import View
 admin.autodiscover()
 
 import apps.pastes.views
 import apps.users.views
-#from apps.users.views import *
 
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
@@ -22,6 +22,7 @@ urlpatterns = patterns('',
             form_class=UserRegistrationForm,
             success_url='/login/'
     )), name='registration'),
+    url(r'^password/', include('password_reset.urls')),
     url(r'^trends/$', apps.pastes.views.TrendingPastesView.as_view(), name='trends', kwargs={'days' : '1'}),
     url(r'^trends/(?P<days>1|7|30|365|all)/$', apps.pastes.views.TrendingPastesView.as_view(), name='trends_by_day'),
     url(r'^u/', include('apps.users.urls')),

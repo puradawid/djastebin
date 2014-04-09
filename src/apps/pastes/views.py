@@ -1,8 +1,6 @@
 # ./apps/pastes/views.py
 
 # Django imports
-from django.shortcuts import render
-from django.views.generic import View
 from apps.pastes.models import Paste, Comment
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from apps.pastes import forms
@@ -13,8 +11,7 @@ from braces.views import LoginRequiredMixin
 from django.views.generic.list import ListView
 from datetime import timedelta
 from django.utils import timezone
-from apps.pastes.models import Comment
-
+from django.forms.models import model_to_dict
 # Managing and displaying pastes views
 
 class CreatePasteView(CreateView):
@@ -26,6 +23,11 @@ class CreatePasteView(CreateView):
         if self.request.user.is_authenticated():
             form.instance.author = self.request.user
         return super(CreatePasteView, self).form_valid(form)
+    
+    def get_initial(self):
+        if self.request.user.is_authenticated():
+            return model_to_dict(self.request.user.account.settings)
+        return super(CreatePasteView, self).get_initial()
 
 class ReadPasteView(CreateView):
     template_name = 'pastes/paste.html'
@@ -63,7 +65,7 @@ class DeletePasteView(LoginRequiredMixin, DeleteView):
     template_name = 'pastes/delete_paste.html'
     
     def get_object(self, *args, **kwargs):
-        obj = super(UpdatePasteView, self).get_object(*args, **kwargs)
+        obj = super(DeletePasteView, self).get_object(*args, **kwargs)
         if not obj.author == self.request.user:
             raise Http404
         return obj
