@@ -1,3 +1,11 @@
 from django.contrib import admin
+from apps.pastes.models import Paste
 
-# Register your models here.
+class PasteAdmin(admin.ModelAdmin):
+    readonly_fields = ('hash', 'hits', 'size')
+    list_display = ('title', 'created', 'hits', 'size')
+    list_filter = ('created', 'visibility', 'syntax')
+    search_fields = ('title', 'author')
+    filter_vertical = ('author',)
+
+admin.site.register(Paste, PasteAdmin)

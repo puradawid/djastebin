@@ -2,7 +2,6 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from apps.pastes.forms import CommentForm
 from apps.pastes.models import Paste, Comment
-from django import forms
 
 class CommentFormTestCase(TestCase):
     def setUp(self):

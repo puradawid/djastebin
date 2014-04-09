@@ -3,8 +3,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.forms.models import ModelForm
 from django.contrib.auth.hashers import make_password
-from apps.users.models import Settings
-from apps.pastes.models import Paste
 
 class UserRegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -55,7 +53,3 @@ class ProfileEditForm(ModelForm):
         else:
             password = make_password(self.cleaned_data['password'])
         return password
-    
-class SettingsChangeForm(ModelForm):
-    class Meta:
-        model = Settings

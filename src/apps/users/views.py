@@ -1,14 +1,11 @@
-from django.shortcuts import render
-from django.views.generic.base import View
-from apps.users.forms import ProfileEditForm, SettingsChangeForm
+from apps.users.forms import ProfileEditForm
 from apps.pastes.models import Paste
 from django.views.generic.list import ListView
 from django.contrib.auth.models import User
-from django.http.response import HttpResponseRedirect, Http404
+from django.http.response import Http404
 from django.views.generic.edit import UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
 from braces.views._access import LoginRequiredMixin
-from django.core.urlresolvers import reverse
 from apps.users.models import Settings
 
 # Create your views here.

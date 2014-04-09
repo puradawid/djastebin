@@ -18,7 +18,7 @@ class Paste(models.Model):
     title = models.CharField(max_length=70, default='Untitled')
     created = models.DateTimeField(auto_now_add=True)
     content = models.TextField()
-    hash = models.SlugField()
+    hash = models.SlugField(editable=False)
     syntax = models.CharField(max_length=20, choices=SYNTAX_CHOICES)
     visibility = models.CharField(max_length=8, choices=VISIBILITY_CHOICES)
     expire_date = models.DateTimeField(null=True, blank=True, default=None)

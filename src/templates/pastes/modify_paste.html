@@ -24,8 +24,8 @@
 					{% endif %}
 				</legend>
 				<div class="form-group {{ form.content.errors|yesno:"has-error," }}">
-					<div class="col-lg-9">
-						{{form.content|add_class:"form-control"|add_class:"no-resize"}}
+					<div class="col-lg-12">
+						{{form.content|add_class:"form-control"}}
 						{% include "simple_messages.html" with errors=form.content.errors %}	
 					</div>
 				</div>

@@ -5,11 +5,9 @@ from django_common.decorators import anonymous_required
 import django.contrib.auth.views
 from django.views.generic.edit import CreateView
 from apps.users.forms import UserRegistrationForm
-from django.views.generic.base import View
-admin.autodiscover()
-
 import apps.pastes.views
 import apps.users.views
+admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
