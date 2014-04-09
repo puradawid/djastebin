@@ -87,10 +87,14 @@ SOCIAL_AUTH_ASSOCIATION_HANDLE_LENGTH = 16
 
 SOCIAL_AUTH_ENABLED_BACKENDS = ('facebook')
 
+SESSION_SERIALIZER='django.contrib.sessions.serializers.PickleSerializer'
+
+# Facebook app settings
 FACEBOOK_APP_ID='1423882051196223'
 FACEBOOK_API_SECRET='704b5ed4e7247b42384010205d7022ff'
 
-SESSION_SERIALIZER='django.contrib.sessions.serializers.PickleSerializer'
+FACEBOOK_EXTENDED_PERMISSIONS = ['email']
+
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
