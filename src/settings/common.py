@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'widget_tweaks',
     'mptt',
     'password_reset',
+    'social_auth',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -62,11 +63,33 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     'django.contrib.messages.context_processors.messages',
     'djastebin.context_processors.recent_pastes',
+    'social_auth.context_processors.social_auth_by_type_backends',
+
 )
 
 ROOT_URLCONF = 'djastebin.urls'
 
 WSGI_APPLICATION = 'djastebin.wsgi.application'
+
+# Social authentication
+
+AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.facebook.FacebookBackend',
+)
+
+SOCIAL_AUTH_DEFAULT_USERNAME = 'new_social_auth_user'
+SOCIAL_AUTH_UID_LENGTH = 16
+SOCIAL_AUTH_ASSOCIATION_HANDLE_LENGTH = 16
+SOCIAL_AUTH_NONCE_SERVER_URL_LENGTH = 16
+SOCIAL_AUTH_ASSOCIATION_SERVER_URL_LENGTH = 16
+SOCIAL_AUTH_ASSOCIATION_HANDLE_LENGTH = 16
+
+SOCIAL_AUTH_ENABLED_BACKENDS = ('facebook')
+
+FACEBOOK_APP_ID='1423882051196223'
+FACEBOOK_API_SECRET='' # Facebook key from djastebin app
+
+SESSION_SERIALIZER='django.contrib.sessions.serializers.PickleSerializer'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
@@ -98,6 +121,8 @@ LOGIN_URL = '/login/'
 LOGOUT_URL = '/logout/'
 
 LOGIN_REDIRECT_URL = '/'
+
+LOGIN_ERROR_URL = '/login/'
 
 STATIC_URL = '/static/'
 

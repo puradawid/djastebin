@@ -13,7 +13,7 @@
 				</legend>
 				
 				{% include "fields.html" with fields=form %}
-				
+				<a href="{% url 'socialauth_begin' 'facebook' %}">Login with Facebook</a>
 				<div class="form-group">
 					<div class="col-lg-1 col-lg-offset-3">
 						<button type="submit" class="btn btn-primary">
