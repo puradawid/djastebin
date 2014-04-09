@@ -31,3 +31,7 @@
 	display: none;
 	margin: 0px 0px 0px 15px;
 }
+
+.forgot-password-btn {
+	float: left;
+}

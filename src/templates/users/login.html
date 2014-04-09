@@ -4,6 +4,7 @@
 
 {% block content %}
 {% load widget_tweaks %}
+{% load staticfiles %}
 	<div class="well bs-component">
 		<form method="post" class="form-horizontal">{% csrf_token %}
 			{% include "messages.html" with messages=form.non_field_errors type='danger' %}
@@ -11,18 +12,23 @@
 				<legend>
 					Login
 				</legend>
-				
-				{% include "fields.html" with fields=form %}
-				<a href="{% url 'socialauth_begin' 'facebook' %}">Login with Facebook</a>
-				<div class="form-group">
-					<div class="col-lg-1 col-lg-offset-3">
-						<button type="submit" class="btn btn-primary">
-							Submit
-						</button>
-						<a href="{% url "password_reset_recover" %}" class="btn btn-default">Forgot password?</a>
-						<input type="hidden" name="next" value="/" />
+				<div class="col-lg-6">
+					{% include "fields.html" with fields=form %}
+					<div class="form-group">
+						<div class="col-lg-9 col-lg-offset-3">
+							<button type="submit" class="btn btn-primary">
+								Submit
+							</button>
+							<a href="{% url "password_reset_recover" %}" class="btn btn-default">Forgot password?</a>
+							<input type="hidden" name="next" value="/" />
+						</div>
 					</div>
 				</div>
+				<div class="col-lg-6">
+					<p>Use your existing account from...</p>
+					<p><a href="{% url 'socialauth_begin' 'facebook' %}"><img src="{% static 'images/fb-login.png' %}" alt="Login with facebook" /></a></p>
+				</div>
+				
 			</fieldset>
 		</form>
 	</div>

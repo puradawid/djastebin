@@ -72,6 +72,7 @@ ROOT_URLCONF = 'djastebin.urls'
 WSGI_APPLICATION = 'djastebin.wsgi.application'
 
 # Social authentication
+# http://django-social-auth.readthedocs.org/en/latest/
 
 AUTHENTICATION_BACKENDS = (
     'social_auth.backends.facebook.FacebookBackend',
@@ -87,7 +88,7 @@ SOCIAL_AUTH_ASSOCIATION_HANDLE_LENGTH = 16
 SOCIAL_AUTH_ENABLED_BACKENDS = ('facebook')
 
 FACEBOOK_APP_ID='1423882051196223'
-FACEBOOK_API_SECRET='' # Facebook key from djastebin app
+FACEBOOK_API_SECRET='704b5ed4e7247b42384010205d7022ff'
 
 SESSION_SERIALIZER='django.contrib.sessions.serializers.PickleSerializer'
 
