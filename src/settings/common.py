@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'widget_tweaks',
     'mptt',
     'password_reset',
+    'social_auth',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -62,11 +63,43 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     'django.contrib.messages.context_processors.messages',
     'djastebin.context_processors.recent_pastes',
+    'social_auth.context_processors.social_auth_by_type_backends',
+
 )
 
 ROOT_URLCONF = 'djastebin.urls'
 
 WSGI_APPLICATION = 'djastebin.wsgi.application'
+
+# Social authentication
+# http://django-social-auth.readthedocs.org/en/latest/
+
+AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.facebook.FacebookBackend',
+    'social_auth.backends.google.GoogleOAuth2Backend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIAL_AUTH_DEFAULT_USERNAME = 'new_social_auth_user'
+SOCIAL_AUTH_UID_LENGTH = 16
+SOCIAL_AUTH_ASSOCIATION_HANDLE_LENGTH = 16
+SOCIAL_AUTH_NONCE_SERVER_URL_LENGTH = 16
+SOCIAL_AUTH_ASSOCIATION_SERVER_URL_LENGTH = 16
+SOCIAL_AUTH_ASSOCIATION_HANDLE_LENGTH = 16
+
+SOCIAL_AUTH_ENABLED_BACKENDS = ('facebook', 'google')
+
+SESSION_SERIALIZER='django.contrib.sessions.serializers.PickleSerializer'
+
+# Facebook app settings
+FACEBOOK_APP_ID='1423882051196223'
+FACEBOOK_API_SECRET='704b5ed4e7247b42384010205d7022ff'
+
+FACEBOOK_EXTENDED_PERMISSIONS = ['email']
+
+# Google app settings
+GOOGLE_OAUTH2_CLIENT_ID = '645877344566-5eu9rb7do6dqen2fses7lv77tcovc9mh.apps.googleusercontent.com'
+GOOGLE_OAUTH2_CLIENT_SECRET = 'IBGIuIZYTio-4oZyFJYd9wc1'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
@@ -98,6 +131,8 @@ LOGIN_URL = '/login/'
 LOGOUT_URL = '/logout/'
 
 LOGIN_REDIRECT_URL = '/'
+
+LOGIN_ERROR_URL = '/login/'
 
 STATIC_URL = '/static/'
 
