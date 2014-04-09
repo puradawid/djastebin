@@ -91,7 +91,7 @@
 						<div class="bs-component">
 							<div class="list-group">
 							{% for paste in recent_pastes %}
-								<a href="{% url "show_paste" paste.pk %}" class="list-group-item"> <h5 class="list-group-item-heading">{{ paste }}</h5>
+								<a href="{% url "show_paste" paste.hash %}" class="list-group-item"> <h5 class="list-group-item-heading">{{ paste }}</h5>
 								<p class="list-group-item-text list-group-item-caption">
 									{{ paste.created | naturaltime }}
 								</p> </a>

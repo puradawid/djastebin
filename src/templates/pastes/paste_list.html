@@ -20,7 +20,7 @@
 				<tbody>
 					{% for paste in paste_list %}
 						<tr>
-							<td><i class="fa {{ paste.visibility | visibility_convert }}"></i> <a href="{% url "show_paste" paste.pk %}">{{ paste.title }}</a></td>
+							<td><i class="fa {{ paste.visibility | visibility_convert }}"></i> <a href="{% url "show_paste" paste.hash %}">{{ paste.title }}</a></td>
 							<td>{{ paste.created | naturaltime }}</td>
 							<th>{{ paste.expire_date | naturaltime | default_if_none:"Never" }}</th>
 							<td>{{ paste.hits }}</td>

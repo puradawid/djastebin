@@ -35,18 +35,18 @@ class ReadPasteView(CreateView):
     success_url = '.'
     
     def get_context_data(self, **kwargs):
-        origin = Paste.objects.get(pk=self.kwargs['pk'])
+        origin = Paste.objects.get(hash=self.kwargs['hash'])
         context = super(ReadPasteView, self).get_context_data(**kwargs)
- 	context['paste'] = origin
-	if origin.visibility == 'PRIVATE':
-           if not origin.author == self.request.user:
-              raise PermissionDenied       
-        context['nodes'] = Comment.objects.filter(paste=Paste.objects.get(pk=self.kwargs['pk']))
+        context['paste'] = origin
+        if origin.visibility == 'PRIVATE':
+            if not origin.author == self.request.user:
+                raise PermissionDenied       
+        context['nodes'] = Comment.objects.filter(paste=Paste.objects.get(hash=self.kwargs['hash']))
         return context
     
     def form_valid(self, form):
         form.instance.author = self.request.user
-        form.instance.paste = Paste.objects.get(pk=self.kwargs['pk'])
+        form.instance.paste = Paste.objects.get(hash=self.kwargs['hash'])
         return super(ReadPasteView, self).form_valid(form)
 
 class UpdatePasteView(LoginRequiredMixin, UpdateView):

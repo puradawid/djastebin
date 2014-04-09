@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from mptt.models import MPTTModel, TreeForeignKey
+from hashids import Hashids
 
 class Paste(models.Model):
     SYNTAX_CHOICES = (
@@ -17,7 +18,7 @@ class Paste(models.Model):
     title = models.CharField(max_length=70, default='Untitled')
     created = models.DateTimeField(auto_now_add=True)
     content = models.TextField()
-    hash = models.CharField(max_length=100) # Temporary length
+    hash = models.SlugField()
     syntax = models.CharField(max_length=20, choices=SYNTAX_CHOICES)
     visibility = models.CharField(max_length=8, choices=VISIBILITY_CHOICES)
     expire_date = models.DateTimeField(null=True, blank=True, default=None)
@@ -27,8 +28,15 @@ class Paste(models.Model):
     
     def get_absolute_url(self):
         from django.core.urlresolvers import reverse
-        return reverse('show_paste', args=[str(self.pk)])
+        return reverse('show_paste', args=[str(self.hash)])
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            super(Paste, self).save(*args, **kwargs)
+            self.hash = Hashids().encrypt(self.id)
     
+        super(Paste, self).save(*args, **kwargs)
+
     def __unicode__(self):
         return self.title
     
