@@ -1,0 +1,9 @@
+{% load widget_tweaks %}
+{% for field in fields %}
+	<div class="form-group {{ field.errors|yesno:"has-error," }}">
+		<div class="col-lg-12">
+			{{ field | add_class:"form-control" }}
+			{% include "simple_messages.html" with errors=field.errors %}	
+		</div>
+	</div>
+{% endfor %}
