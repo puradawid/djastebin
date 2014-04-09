@@ -9,5 +9,5 @@ django-braces==1.4.0
 Pygments==1.6
 django-password-reset==0.7
 django-mptt==0.6.0
-hashids==1.0.0
+hashids==0.8.4
 django-social-auth==0.7.28
