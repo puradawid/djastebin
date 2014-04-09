@@ -34,8 +34,9 @@ class Paste(models.Model):
         if not self.id:
             super(Paste, self).save(*args, **kwargs)
             self.hash = Hashids().encrypt(self.id)
-    
-        super(Paste, self).save(*args, **kwargs)
+            self.save()
+        else:
+            super(Paste, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return self.title

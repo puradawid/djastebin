@@ -20,10 +20,9 @@ class Account(models.Model):
     user = models.OneToOneField(User)
     settings = models.OneToOneField(Settings)
     
-@receiver(post_save, sender=User)
 def create_account_for_new_user(sender, created, instance, **kwargs):
     if created:
         settings = Settings.objects.create()
-        settings.save()
         account = Account.objects.create(user=instance, settings=settings)
-        account.save()
+        
+post_save.connect(create_account_for_new_user, User, dispatch_uid='create_account_for_new_user')

@@ -23,7 +23,7 @@ class CommentFormTestCase(TestCase):
     def test_valid_form(self):
         "Submit valid data"
         
-        comment_fourth_lv = Comment.objects.get(pk=3)
+        comment_third_lv = Comment.objects.get(pk=3)
         
         # Submit valid data without parent
         user = User.objects.get(pk=1)
@@ -35,7 +35,7 @@ class CommentFormTestCase(TestCase):
         # Submit valid data with parent
         user = User.objects.get(pk=1)
         paste = Paste.objects.get(pk=1)
-        data = { 'content': 'foo', 'author': user, 'paste': paste, 'parent': comment_fourth_lv }
+        data = { 'content': 'foo', 'author': user, 'paste': paste, 'parent': comment_third_lv }
         form = CommentForm(data)
         self.assertTrue(form.is_valid())
         

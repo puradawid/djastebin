@@ -10,26 +10,24 @@ class AccountTestCase(TestCase):
     
     username = 'foo'
     password = 'SuperStrongPassword'
-    default_syntax = 'NONE'
-    default_visibility = 'PUBLIC'
+    syntax = 'NONE'
+    visibility = 'PUBLIC'
     
     def setUp(self):
         user = User.objects.create_user(username=self.username, password=self.password)
-        settings = Settings.objects.create(default_syntax=self.default_syntax, default_visibility=self.default_visibility)
-        account = Account.objects.create(user = user, settings = settings)
     
     def test_db(self):
         user = User.objects.get(username=self.username)
         settings = Settings.objects.get(id=1)
         
         self.assertEqual(user.username, self.username)
-        self.assertEqual(settings.default_syntax, self.default_syntax)
-        self.assertEqual(settings.default_visibility, self.default_visibility)
+        self.assertEqual(settings.syntax, self.syntax)
+        self.assertEqual(settings.visibility, self.visibility)
         
     def test_account_relations(self):
         user = User.objects.get(username=self.username)
-        self.assertEqual(user.account.settings.default_syntax, self.default_syntax)
-        self.assertEqual(user.account.settings.default_visibility, self.default_visibility)
+        self.assertEqual(user.account.settings.syntax, self.syntax)
+        self.assertEqual(user.account.settings.visibility, self.visibility)
         
 class ProfileEditFormTestCase(TestCase):
         
@@ -77,7 +75,7 @@ class SettingsChangeFormTestCase(TestCase):
         self.assertFalse(form.is_valid())
         
         #Submit invalid data (not exists in choices)
-        data = { 'default_syntax': 'foo', 'default_syntax': 'foo', 'default_expiration': 'foo' }
+        data = { 'syntax': 'foo', 'visibility': 'foo', 'expiration': 'foo' }
         form = SettingsChangeForm()
         self.assertFalse(form.is_valid())
     
@@ -85,27 +83,27 @@ class SettingsChangeFormTestCase(TestCase):
         "Submit valid data"
         
         # Submit default data
-        data = { 'default_syntax': 'NONE', 'default_visibility': 'PUBLIC', 'default_expiration': '0' }
+        data = { 'syntax': 'NONE', 'visibility': 'PUBLIC', 'expiration': '0' }
         form = SettingsChangeForm(data=data)
         self.assertTrue(form.is_valid())
         
         # Submit all syntax data
         for i in range(len(self.SYNTAX_CHOICES)):
             choice = self.SYNTAX_CHOICES[i]
-            data = { 'default_syntax': choice[0], 'default_visibility': 'PUBLIC', 'default_expiration': '0' }
+            data = { 'syntax': choice[0], 'visibility': 'PUBLIC', 'expiration': '0' }
             form = SettingsChangeForm(data=data)
             self.assertTrue(form.is_valid())
             
         # Submit all visibility data
         for i in range(len(self.VISIBILITY_CHOICES)):
             choice = self.VISIBILITY_CHOICES[i]
-            data = { 'default_syntax': 'NONE', 'default_visibility': choice[0], 'default_expiration': '0' }
+            data = { 'syntax': 'NONE', 'visibility': choice[0], 'expiration': '0' }
             form = SettingsChangeForm(data=data)
             self.assertTrue(form.is_valid())
             
         # Submit all syntax data
         for i in range(len(self.EXPIRATION_CHOICES)):
             choice = self.EXPIRATION_CHOICES[i]
-            data = { 'default_syntax': 'NONE', 'default_visibility': 'PUBLIC', 'default_expiration': choice[0] }
+            data = { 'syntax': 'NONE', 'visibility': 'PUBLIC', 'expiration': choice[0] }
             form = SettingsChangeForm(data=data)
             self.assertTrue(form.is_valid())
