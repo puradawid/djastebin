@@ -77,6 +77,7 @@ WSGI_APPLICATION = 'djastebin.wsgi.application'
 AUTHENTICATION_BACKENDS = (
     'social_auth.backends.facebook.FacebookBackend',
     'social_auth.backends.google.GoogleOAuth2Backend',
+    'django.contrib.auth.backends.ModelBackend',
 )
 
 SOCIAL_AUTH_DEFAULT_USERNAME = 'new_social_auth_user'

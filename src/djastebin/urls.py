@@ -28,4 +28,5 @@ urlpatterns = patterns('',
     url(r'^u/', include('apps.users.urls')),
     url(r'^', include('apps.pastes.urls')),
     url(r'', include('social_auth.urls')),
+
 )
