@@ -3,7 +3,7 @@
 # Django imports
 from django.shortcuts import render
 from django.views.generic import View
-from apps.pastes.models import Paste
+from apps.pastes.models import Paste, Comment
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from apps.pastes import forms
 from django.http.response import Http404 
@@ -27,23 +27,25 @@ class CreatePasteView(CreateView):
             form.instance.author = self.request.user
         return super(CreatePasteView, self).form_valid(form)
 
-class ShowPasteCreateCommentView(CreateView):
-    model = Comment
-    fields = ['content']
+class ReadPasteView(CreateView):
     template_name = 'pastes/paste.html'
-
-    def valid_form(self, form):
-        form.instance.paste = Paste.objects.get(id=self.kwargs['pk'])  #set owner, paste, etc
-	return super(ShowPasteCreateCommentView, self).valid_form(form)
-
+    form_class = forms.CommentForm
+    success_url = '.'
+    
     def get_context_data(self, **kwargs):
         origin = Paste.objects.get(pk=self.kwargs['pk'])
-        context = super(CreateView, self).get_context_data(**kwargs)
-	context['paste'] = origin
+        context = super(ReadPasteView, self).get_context_data(**kwargs)
+ 	context['paste'] = origin
 	if origin.visibility == 'PRIVATE':
            if not origin.author == self.request.user:
-              raise PermissionDenied
+              raise PermissionDenied       
+        context['nodes'] = Comment.objects.filter(paste=Paste.objects.get(pk=self.kwargs['pk']))
         return context
+    
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.instance.paste = Paste.objects.get(pk=self.kwargs['pk'])
+        return super(ReadPasteView, self).form_valid(form)
 
 class UpdatePasteView(LoginRequiredMixin, UpdateView):
     model = Paste

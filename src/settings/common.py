@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     ##### Third party apps #####
     'django_cron',
     'widget_tweaks',
+    'mptt',
 )
 
 MIDDLEWARE_CLASSES = (

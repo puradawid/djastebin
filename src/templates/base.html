@@ -18,6 +18,8 @@
 		<link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
 		<link rel="stylesheet" href="{% static "css/bootstrap-extend.css" %}">
 		<link rel="stylesheet" href="{% static "css/font-awesome.min.css" %}">
+
+		<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 	</head>
 
 	<body>
@@ -43,24 +45,24 @@
 
 					<ul class="nav navbar-nav navbar-right">
 						{% if user.is_authenticated %}
-							<li>
-								<a href="{% url "user" user.username %}"><i class="fa fa-files-o"></i> My pastes</a>
-							</li>
-							<li class="dropdown">
-								<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes"><i class="fa fa-user"></i> {{ user.username }}<span class="caret"></span></a>
-								<ul class="dropdown-menu" aria-labelledby="themes">
-									<li>
-										<a href="{% url "profile" %}"><i class="fa fa-user"></i> Profile</a>
-									</li>
-									<li>
-										<a href="{% url "settings" %}"><i class="fa fa-gear"></i> Settings</a>
-									</li>
-									<li class="divider"></li>
-									<li>
-										<a href="{% url "logout" %}"><i class="fa fa-sign-out"></i> Logout</a>
-									</li>
-								</ul>
-							</li>
+						<li>
+							<a href="{% url "user" user.username %}"><i class="fa fa-files-o"></i> My pastes</a>
+						</li>
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes"><i class="fa fa-user"></i> {{ user.username }}<span class="caret"></span></a>
+							<ul class="dropdown-menu" aria-labelledby="themes">
+								<li>
+									<a href="{% url "profile" %}"><i class="fa fa-user"></i> Profile</a>
+								</li>
+								<li>
+									<a href="{% url "settings" %}"><i class="fa fa-gear"></i> Settings</a>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<a href="{% url "logout" %}"><i class="fa fa-sign-out"></i> Logout</a>
+								</li>
+							</ul>
+						</li>
 						{% else %}
 						<li>
 							<a href="{% url "registration" %}"><i class="fa fa-user"></i> Sign in</a>
@@ -101,8 +103,6 @@
 				</div>
 			</div>
 		</div>
-
-		<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 		<script src="{% static "js/bootstrap.min.js" %}"></script>
 	</body>
 </html>
