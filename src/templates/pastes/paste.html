@@ -16,10 +16,12 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-lg-12">
+			<div class="col-lg-12 ">
+				<div class="paste-well bs-component overflow">
 				{% autoescape off %}
 				{{paste.content|syntax_highlight:paste.syntax}}
 				{% endautoescape %}
+				</div>
 			</div>
 		</div>
 		{% include "pastes/comments.html" %}

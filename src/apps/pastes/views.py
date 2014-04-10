@@ -39,9 +39,10 @@ class ReadPasteView(CreateView):
         context = super(ReadPasteView, self).get_context_data(**kwargs)
         context['paste'] = origin
         if origin.visibility == 'PRIVATE':
-            if not origin.author == self.request.user:
-                raise PermissionDenied       
-        context['nodes'] = Comment.objects.filter(paste=Paste.objects.get(hash=self.kwargs['hash']))
+           if not origin.author == self.request.user:
+              raise PermissionDenied       
+        context['nodes'] = Comment.objects.filter(paste=origin)
+
         return context
     
     def form_valid(self, form):
