@@ -6,6 +6,5 @@ class PasteAdmin(admin.ModelAdmin):
     list_display = ('title', 'created', 'hits', 'size')
     list_filter = ('created', 'visibility', 'syntax')
     search_fields = ('title', 'author')
-    filter_vertical = ('author',)
 
 admin.site.register(Paste, PasteAdmin)
