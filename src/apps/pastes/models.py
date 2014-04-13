@@ -20,7 +20,7 @@ class Paste(models.Model):
     title = models.CharField(max_length=70, default='Untitled')
     created = models.DateTimeField(auto_now_add=True)
     content = models.TextField()
-    hash = models.SlugField(editable=False, primary_key=True)
+    hash = models.CharField(max_length=15, editable=False, primary_key=True)
     syntax = models.CharField(max_length=20, choices=SYNTAX_CHOICES)
     visibility = models.CharField(max_length=8, choices=VISIBILITY_CHOICES)
     expire_date = models.DateTimeField(null=True, blank=True, default=None)
@@ -30,10 +30,10 @@ class Paste(models.Model):
     
     def get_absolute_url(self):
         from django.core.urlresolvers import reverse
-        return reverse('show_paste', args=[str(self.hash)])
+        return reverse('show_paste', args=[str(self.pk)])
 
     def save(self, *args, **kwargs):
-        if not self.hash:
+        if not self.pk:
             hashids = Hashids(settings.SECRET_KEY)
             self.hash = hashids.encrypt(int(round(time.time()*10000)))
         

@@ -6,7 +6,7 @@ from apps.pastes.models import Paste, Comment
 class CommentFormTestCase(TestCase):
     def setUp(self):
         user = User.objects.create(username='default', password='pass', email='email')
-        paste = Paste.objects.create(content='foo', hash='foo', syntax='NONE', visibility='PUBLIC', author=user)
+        paste = Paste.objects.create(content='foo', pk='foo', syntax='NONE', visibility='PUBLIC', author=user)
         
         comment_first_lv = Comment.objects.create(content='foo', author=user, paste=paste, parent=None)
         comment_second_lv = Comment.objects.create(content='foo', author=user, paste=paste, parent=comment_first_lv)
