@@ -42,16 +42,29 @@ class Paste(models.Model):
         return self.title
     
 class Comment(MPTTModel):
-    created = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
     content = models.TextField()
     author = models.ForeignKey(User)
     paste = models.ForeignKey(Paste)
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children')
+    deleted = models.BooleanField(default=False)
     
     def get_absolute_url(self):
         from django.core.urlresolvers import reverse
         return reverse('show_paste', args=[str(self.pk)])
-
+    
+    def get_content(self):
+        if self.deleted == False:
+            return self.content
+        else:
+            return 'Deleted by administrator'
+    
     class MPTTMeta:
         order_insertion_by = ['created']
+        
+    def __unicode__(self):
+        if len(self.content) < 50:
+            return self.content + '...'
+        else:
+            return self.content[50:] + '...'
 
