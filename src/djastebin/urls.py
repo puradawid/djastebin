@@ -24,5 +24,6 @@ urlpatterns = patterns('',
     url(r'^trends/$', apps.pastes.views.TrendingPastesView.as_view(), name='trends', kwargs={'days' : '1'}),
     url(r'^trends/(?P<days>1|7|30|365|all)/$', apps.pastes.views.TrendingPastesView.as_view(), name='trends_by_day'),
     url(r'^u/', include('apps.users.urls')),
+    url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^', include('apps.pastes.urls')),
 )

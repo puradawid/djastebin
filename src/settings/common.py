@@ -8,7 +8,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
@@ -87,8 +87,8 @@ DATABASES = {
 LANGUAGE_CODE = 'pl'
 
 LANGUAGES = (
-    ('pl', _(u'Polish')),
-    ('en-us', _(u'English')),
+    ('pl', _('Polish')),
+    ('en-us', _('English')),
 )
 
 TIME_ZONE = 'Europe/Warsaw'

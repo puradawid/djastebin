@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-13 21:31+0200\n"
+"POT-Creation-Date: 2014-04-13 23:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -109,11 +109,11 @@ msgstr "Twoje ustawienia zostały zaktualizowane!"
 msgid "Your profile has been updated!"
 msgstr "Twój profil został zaktualizowany!"
 
-#: templates/base.html:40
+#: templates/base.html:41
 msgid "Create new paste"
 msgstr "Utwórz nową wklejkę"
 
-#: templates/base.html:43
+#: templates/base.html:44
 msgid "Treniding pastes"
 msgstr "Trendy"
 
@@ -146,7 +146,11 @@ msgstr "Rejestracja"
 msgid "Log in"
 msgstr "Logowanie"
 
-#: templates/base.html:94
+#: templates/base.html:81
+msgid "Language"
+msgstr "Język"
+
+#: templates/base.html:108
 msgid "Recently added"
 msgstr "Ostatnio dodane"
 
