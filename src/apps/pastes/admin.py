@@ -1,8 +1,6 @@
 from django.contrib import admin
 from apps.pastes.models import Paste
 from apps.pastes.models import Comment
-from django.template.defaultfilters import escape
-from django.core.urlresolvers import reverse
 
 class PasteAdmin(admin.ModelAdmin):
     def has_add_permission(self, request):
@@ -39,5 +37,7 @@ class CommentAdmin(admin.ModelAdmin):
     readonly_fields = ['author', 'paste']
     fields = ['author', 'paste', 'content', 'deleted']
     list_display = ['__unicode__', 'author', 'created', 'paste', 'deleted']
+    list_filter = ['created']
+    search_fields = ['content']
     
 admin.site.register(Comment, CommentAdmin)

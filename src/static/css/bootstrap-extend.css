@@ -35,3 +35,8 @@
 .forgot-password-btn {
 	float: left;
 }
+
+.comment-deleted {
+	background-color: #e7e6e6;
+	color: #c1c1c1;
+}

@@ -18,7 +18,7 @@
 	
 		<div class="row comment-row">
 			<div class='col-lg-{{ "12"|subtract:node.level }} col-lg-offset-{{ node.level }}'>
-				<div class="well col-lg-12">
+				<div class="well col-lg-12 {% if node.deleted %}comment-deleted{% endif %}">
 					<p>
 						<span class="comment-id"><a href="#">#{{ node.pk }}</a></span>
 						<span class="comment-author"><a href='{% url "user" node.author.username %}'>{{ node.author.username }}</a></span>

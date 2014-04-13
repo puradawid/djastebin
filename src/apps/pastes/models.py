@@ -57,7 +57,7 @@ class Comment(MPTTModel):
         if self.deleted == False:
             return self.content
         else:
-            return 'Deleted by administrator'
+            return '[deleted by administrator]'
     
     class MPTTMeta:
         order_insertion_by = ['created']
