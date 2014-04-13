@@ -49,15 +49,15 @@ class Comment(MPTTModel):
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children')
     deleted = models.BooleanField(default=False)
     
-    def get_absolute_url(self):
-        from django.core.urlresolvers import reverse
-        return reverse('show_paste', args=[str(self.pk)])
-    
     def get_content(self):
         if self.deleted == False:
             return self.content
         else:
             return '[deleted by administrator]'
+    
+    def get_absolute_url(self):
+        from django.core.urlresolvers import reverse
+        return reverse('show_paste', args=[str(self.pk)])
     
     class MPTTMeta:
         order_insertion_by = ['created']
