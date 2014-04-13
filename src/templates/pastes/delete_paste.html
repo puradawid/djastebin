@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
-{% block title %}Delete paste{% endblock %}
+{% load i18n %}
+
+{% block title %}{% trans "Delete paste" %}{% endblock %}
 
 {% block content %}
 {% load widget_tweaks %}
@@ -9,17 +11,17 @@
 		<form method="post" class="form-horizontal">{% csrf_token %}
 			<fieldset>
 				<legend>
-					Delete paste
+					{% trans "Delete paste" %}
 				</legend>
-				<p>Are you sure you want to delete "{{ object }}"?</p>
+				<p>{% blocktrans with object_t=object %}Are you sure you want to delete "{{ object_t }}"?{% endblocktrans %}</p>
 				
 				<div class="form-group">
 					<div class="col-lg-10">
 						<button type="submit" class="btn btn-danger">
-							Yes
+							{% trans "Yes" %}
 						</button>
 						<a class="btn btn-default" href="{% url "show_paste" object.pk %}">
-							No
+							{% trans "No" %}
 						</a>
 					</div>
 				</div>

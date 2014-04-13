@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from django.utils.translation import ugettext_lazy as _
 from django.forms.models import ModelForm
 from django.contrib.auth.hashers import make_password
 
@@ -21,20 +22,20 @@ class UserRegistrationForm(UserCreationForm):
     def clean_username(self):
         username = self.cleaned_data['username']
         if User.objects.filter(username=username).exists():
-            raise forms.ValidationError("That username is already taken")
+            raise forms.ValidationError(_("That username is already taken"))
         return username
     
     def clean_email(self):
         email = self.cleaned_data['email']
         if User.objects.filter(email=email).exists():
-            raise forms.ValidationError("That email is already in use")
+            raise forms.ValidationError(_("That email is already in use"))
         return email
     
 class ProfileEditForm(ModelForm):
-    email = forms.EmailField(required=True, widget=forms.TextInput(attrs={'placeholder': 'Your email'}))
-    password = forms.CharField(required=False, widget=forms.PasswordInput(attrs={'placeholder': 'Leave blank if don\'t want to change'}))
-    first_name = forms.CharField(required=False, widget=forms.TextInput(attrs={'placeholder': 'Your first name'}))
-    last_name = forms.CharField(required=False, widget=forms.TextInput(attrs={'placeholder': 'Your last name'}))
+    email = forms.EmailField(required=True, widget=forms.TextInput(attrs={'placeholder': _('Your email')}))
+    password = forms.CharField(label=_('Password'), required=False, widget=forms.PasswordInput(attrs={'placeholder': _('Leave blank if don\'t want to change')}))
+    first_name = forms.CharField(label=_('First name'), required=False, widget=forms.TextInput(attrs={'placeholder': _('Your first name')}))
+    last_name = forms.CharField(label=_('Last name'), required=False, widget=forms.TextInput(attrs={'placeholder': _('Your last name')}))
     
     class Meta:
         model = User
@@ -43,7 +44,7 @@ class ProfileEditForm(ModelForm):
     def clean_email(self):
         email = self.cleaned_data['email']
         if (email != self.instance.email and User.objects.filter(email=email).exists()):
-            raise forms.ValidationError("That email is already in use")
+            raise forms.ValidationError(_("That email is already in use"))
         return email
     
     def clean_password(self):
