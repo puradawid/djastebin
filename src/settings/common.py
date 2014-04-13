@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'widget_tweaks',
     'mptt',
     'password_reset',
+    'notifications',
 )
 
 MIDDLEWARE_CLASSES = (

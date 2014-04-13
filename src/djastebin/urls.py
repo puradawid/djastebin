@@ -7,10 +7,12 @@ from django.views.generic.edit import CreateView
 from apps.users.forms import UserRegistrationForm
 import apps.pastes.views
 import apps.users.views
+import notifications
 admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^notifications/', include(notifications.urls)),
     url(r'^settings/$', login_required(apps.users.views.SettingsView.as_view()), name='settings'),
     url(r'^profile/$', apps.users.views.ProfileView.as_view(), name='profile'),
     url(r'^login/$', anonymous_required(django.contrib.auth.views.login), {'template_name': 'users/login.html'}, name='login'),

@@ -1,5 +1,9 @@
 {% load staticfiles %} <script src="{% static 'js/comments.js' %}"></script>
 
+<style>
+	a.anchor{display: block; position: relative; top: -20px; visibility: hidden;}
+</style>
+
 <div class="row top15">
 	<div class="col-lg-12">
 		<div class="page-header no-margin-top">
@@ -12,24 +16,27 @@
 {% load mptt_tags %}
 {% load humanize %}
 {% load widget_tweaks %}
+{% load username_finder %}
+
 <section id="comments_tree">
 	{% if nodes %}
 		{% recursetree nodes %}
 	
 		<div class="row comment-row">
+			<a class="anchor" name="{{ node.pk }}"></a>
 			<div class='col-lg-{{ "12"|subtract:node.level }} col-lg-offset-{{ node.level }}'>
 				<div class="well col-lg-12">
 					<p>
-						<span class="comment-id"><a href="#">#{{ node.pk }}</a></span>
+						<span class="comment-id"><a href="#{{ node.pk }}">#{{ node.pk }}</a></span>
 						<span class="comment-author"><a href='{% url "user" node.author.username %}'>{{ node.author.username }}</a></span>
 						<span class="comment-date">{{ node.created|naturaltime }}</span>
 						{% if user.is_authenticated %}
-							{% if node.level < 3 %}
-								<span class="comment-reply"><a href="#" id="node_{{ node.pk }}">reply</a></span>
-							{% endif %}
+							<span class="comment-reply"><a href="#" id="node_{{ node.pk }}">reply</a></span>
 						{% endif %}
 					</p>
-					{{ node.content }}
+					{% autoescape off %}
+						{{ node.content | urlize | url_username }}
+					{% endautoescape %}
 				</div>
 			</div>
 		</div>
@@ -59,8 +66,19 @@
 			<legend>
 				Add new comment
 			</legend>
-			
-			{% include "fields.html" with fields=form %}
+		
+			{% for field in form %}
+				{% if field.is_hidden %}
+					{{ field }}
+				{% else %}
+					<div class="form-group {{ field.errors|yesno:"has-error," }}">
+						<div class="col-lg-12">
+							{{ field | add_class:"form-control" }}
+							{% include "simple_messages.html" with errors=field.errors %}	
+						</div>
+					</div>
+				{% endif %}
+			{% endfor %}
 			
 			<div class="form-group">
 				<div class="col-lg-10 col-lg-offset-0">
