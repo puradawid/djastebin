@@ -59,6 +59,12 @@
 									<li>
 										<a href="{% url "settings" %}"><i class="fa fa-gear"></i> Settings</a>
 									</li>
+									{% if user.is_staff %}
+										<li class="divider"></li>
+										<li>
+											<a href="/admin/"><i class="fa fa-cogs"></i> Admin panel</a>
+										</li>
+									{% endif %}
 									<li class="divider"></li>
 									<li>
 										<a href="{% url "logout" %}"><i class="fa fa-sign-out"></i> Logout</a>
@@ -68,11 +74,6 @@
 							<li>
 								<a class="dropdown-toggle" href="/notifications/" id="themes"><i class="fa fa-envelope"></i> Activity <span class="badge"> {{ unread_count }}</span></a>
 							</li>
-							{% if user.is_staff %}
-								<li>
-									<a href="/admin/"><i class="fa fa-user"></i> Admin panel</a>
-								</li>
-							{% endif %}
 						{% else %}
 						<li>
 							<a href="{% url "registration" %}"><i class="fa fa-user"></i> Sign in</a>
