@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-14 15:29+0200\n"
+"POT-Creation-Date: 2014-04-14 15:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,15 +17,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: apps/pastes/forms.py:19 apps/pastes/models.py:29
+#: apps/pastes/forms.py:19 apps/pastes/models.py:29 apps/users/models.py:16
 msgid "Syntax"
 msgstr "Składnia"
 
-#: apps/pastes/forms.py:20 apps/pastes/models.py:30
+#: apps/pastes/forms.py:20 apps/pastes/models.py:30 apps/users/models.py:15
 msgid "Visibility"
 msgstr "Widoczność"
 
-#: apps/pastes/forms.py:21
+#: apps/pastes/forms.py:21 apps/users/models.py:17
 msgid "Expiration"
 msgstr "Czas wygaśnięcia"
 
@@ -52,6 +52,10 @@ msgstr "Prywatny"
 #: apps/pastes/models.py:25
 msgid "Title"
 msgstr "Tytuł"
+
+#: apps/pastes/models.py:62
+msgid "[deleted by administrator]"
+msgstr "[treść usunięta przez administratora]"
 
 #: apps/users/forms.py:10
 msgid "Username"
@@ -363,6 +367,10 @@ msgstr "Zaloguj"
 #: templates/users/login.html:25
 msgid "Forgot password?"
 msgstr "Zapomniałeś hasła?"
+
+#: templates/users/login.html:31 templates/users/registration.html:33
+msgid "Use your existing account from..."
+msgstr "Skorzystaj z istniejącego konta..."
 
 #: templates/users/profile.html:16
 msgid "Edit profile"
