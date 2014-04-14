@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
-{% block title %}Registration{% endblock %}
+{% load i18n %}
+
+{% block title %}{% trans "Registration" %}{% endblock %}
 
 {% block content %}
 
@@ -14,7 +16,7 @@
 			{% include "messages.html" with messages=form.non_field_errors type='danger' %}
 			<fieldset>
 				<legend>
-					Sign in
+					{% trans "Sign in" %}
 				</legend>
 				<div class="col-lg-8">
 				{% include "fields.html" with fields=form %}
@@ -22,7 +24,7 @@
 				<div class="form-group">
 					<div class="col-lg-10 col-lg-offset-3">
 						<button type="submit" class="btn btn-primary">
-							Register
+							{% trans "Register" %}
 						</button>
 					</div>
 				</div>

@@ -1,27 +1,29 @@
 {% extends 'base.html' %}
 
-{% block title %}Treninding pastes{% endblock %}
-
-{% block content %}
+{% load i18n %}
 {% load widget_tweaks %}
 {% load html_utils %}
+
+{% block title %}{% trans "Treninding pastes" %}{% endblock %}
+
+{% block content %}
 
 	<div class="bs-docs-section">
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="page-header no-margin-top">
-					<h3 class="no-margin-top">Treninding pastes</h3>
+					<h3 class="no-margin-top">{% trans "Treninding pastes" %}</h3>
 				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
 				<p>
-					<a href="{% url "trends_by_day" "1" %}" class="label {{ days | short_if:"1,label-primary,label-default" }}">Today</a>
-					<a href="{% url "trends_by_day" "7" %}" class="label {{ days | short_if:"7,label-primary,label-default" }}">Last 7 days</a>
-					<a href="{% url "trends_by_day" "30" %}" class="label {{ days | short_if:"30,label-primary,label-default" }}">Last 30 days</a>
-					<a href="{% url "trends_by_day" "365" %}" class="label {{ days | short_if:"365,label-primary,label-default" }}">Last 365 days</a>
-					<a href="{% url "trends_by_day" "all" %}" class="label {{ days | short_if:"all,label-primary,label-default" }}">All time</a>
+					<a href="{% url "trends_by_day" "1" %}" class="label {{ days | short_if:"1,label-primary,label-default" }}">{% trans "Today" %}</a>
+					<a href="{% url "trends_by_day" "7" %}" class="label {{ days | short_if:"7,label-primary,label-default" }}">{% trans "Last 7 days" %}</a>
+					<a href="{% url "trends_by_day" "30" %}" class="label {{ days | short_if:"30,label-primary,label-default" }}">{% trans "Last 30 days" %}</a>
+					<a href="{% url "trends_by_day" "365" %}" class="label {{ days | short_if:"365,label-primary,label-default" }}">{% trans "Last 365 days" %}</a>
+					<a href="{% url "trends_by_day" "all" %}" class="label {{ days | short_if:"all,label-primary,label-default" }}">{% trans "All time" %}</a>
 				</p>
 			</div>
 		</div>

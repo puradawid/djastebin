@@ -3,25 +3,25 @@
 {% load widget_tweaks %}
 {% load syntax_highlighting %}
 
-{% block title %}Paste{% endblock %}
+{% block title %}{{ paste.title }}{% endblock %}
 
 {% block content %}
-	<style> {{""|get_css}} </style>
+	<style> {{ ""|get_css }} </style>
 	<div class="bs-docs-section">
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="page-header no-margin-top">
-					<h3 class="no-margin-top">{{paste.title}}</h3>
+					<h3 class="no-margin-top">{{ paste.title }}</h3>
 				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
 				{% autoescape off %}
-				{{paste.content|syntax_highlight:paste.syntax}}
+				{{ paste.content|syntax_highlight:paste.syntax }}
 				{% endautoescape %}
 			</div>
 		</div>
 		{% include "pastes/comments.html" %}
 	</div>
-	{% endblock %}
+{% endblock %}

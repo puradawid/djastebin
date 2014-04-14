@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
-{% block title %}Password recovery{% endblock %}
+{% load i18n %}
+
+{% block title %}{% trans "Password recovery" %}{% endblock %}
 
 {% block content %}
 
@@ -8,11 +10,13 @@
 		<form method="post" class="form-horizontal">{% csrf_token %}
 			<fieldset>
 				<legend>
-					Password reset confirm
+					{% trans "Password reset confirm" %}
 				</legend>
 				{% if invalid %}{% url "password_reset_recover" as recovery_url %}
 				<div class="alert alert-dismissable alert-{{ type }}">
-					<p>Sorry, this password reset link is invalid. You can still <a href="{{ recovery_url }}">request a new one</a>.</p>
+					<p>
+					{% blocktrans with recovery_url_t=recovery_url %}Sorry, this password reset link is invalid. You can still <a href="{{ recovery_url_t }}">request a new one</a>.{% endblocktrans %}
+					</p>
 				</div>
 				{% else %}
 					{% include "fields.html" with fields=form %}
@@ -20,7 +24,7 @@
 					<div class="form-group">
 						<div class="col-lg-10 col-lg-offset-3">
 							<button type="submit" class="btn btn-primary">
-								Submit
+								{% trans "Submit" %}
 							</button>
 						</div>
 					</div>

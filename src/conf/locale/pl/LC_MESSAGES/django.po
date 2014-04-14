@@ -1,0 +1,394 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-04-14 15:29+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: apps/pastes/forms.py:19 apps/pastes/models.py:29
+msgid "Syntax"
+msgstr "Składnia"
+
+#: apps/pastes/forms.py:20 apps/pastes/models.py:30
+msgid "Visibility"
+msgstr "Widoczność"
+
+#: apps/pastes/forms.py:21
+msgid "Expiration"
+msgstr "Czas wygaśnięcia"
+
+#: apps/pastes/forms.py:41
+msgid "Don't change"
+msgstr "Nie zmieniaj"
+
+#: apps/pastes/models.py:15
+msgid "None"
+msgstr "Brak"
+
+#: apps/pastes/models.py:20
+msgid "Public"
+msgstr "Publiczny"
+
+#: apps/pastes/models.py:21
+msgid "Unlisted"
+msgstr "Niepubliczny"
+
+#: apps/pastes/models.py:22
+msgid "Private"
+msgstr "Prywatny"
+
+#: apps/pastes/models.py:25
+msgid "Title"
+msgstr "Tytuł"
+
+#: apps/users/forms.py:10
+msgid "Username"
+msgstr "Nazwa użytkownika"
+
+#: apps/users/forms.py:11
+msgid ""
+"Required. 30 characters or fewer. Alphanumeric characters only (letters, "
+"digits, underscores and period)."
+msgstr "Wymagane. 30 znaków lub mniej. Litery, cyfry, podkreślenia i kropki."
+
+#: apps/users/forms.py:12
+msgid "This value must contain only letters, numbers, underscores and periods."
+msgstr "Ta wartość może posiadać tylko litery, cyfry, podkreślenia i kropki"
+
+#: apps/users/forms.py:28
+msgid "That username is already taken"
+msgstr "Ta nazwa jest już zajęta"
+
+#: apps/users/forms.py:34 apps/users/forms.py:50
+msgid "That email is already in use"
+msgstr "Ten adres email jest już uzywany"
+
+#: apps/users/forms.py:38
+msgid "Your email"
+msgstr "Twój email"
+
+#: apps/users/forms.py:39
+msgid "Password"
+msgstr "Hasło"
+
+#: apps/users/forms.py:39
+msgid "Leave blank if don't want to change"
+msgstr "Zostaw pole puste jeśli nie chcesz zmieniać"
+
+#: apps/users/forms.py:40
+msgid "First name"
+msgstr "Imię"
+
+#: apps/users/forms.py:40
+msgid "Your first name"
+msgstr "Twoje imię"
+
+#: apps/users/forms.py:41
+msgid "Last name"
+msgstr "Nazwisko"
+
+#: apps/users/forms.py:41
+msgid "Your last name"
+msgstr "Twoje nazwisko"
+
+#: apps/users/models.py:10
+msgid "Never"
+msgstr "Nigdy"
+
+#: apps/users/models.py:11
+msgid "5 minutes"
+msgstr "5 minut"
+
+#: apps/users/models.py:12
+msgid "10 minutes"
+msgstr "10 minut"
+
+#: apps/users/views.py:42
+msgid "Your settins has been updated!"
+msgstr "Twoje ustawienia zostały zaktualizowane!"
+
+#: apps/users/views.py:52
+msgid "Your profile has been updated!"
+msgstr "Twój profil został zaktualizowany!"
+
+#: settings/common.py:124
+msgid "Polish"
+msgstr ""
+
+#: settings/common.py:125
+msgid "English"
+msgstr ""
+
+#: templates/base.html:52
+msgid "Create new paste"
+msgstr "Utwórz nową wklejkę"
+
+#: templates/base.html:55
+msgid "Treniding pastes"
+msgstr "Trendy"
+
+#: templates/base.html:61
+msgid "My pastes"
+msgstr "Moje wklejki"
+
+#: templates/base.html:67 templates/users/profile.html:6
+msgid "Profile"
+msgstr "Profil"
+
+#: templates/base.html:70 templates/pastes/modify_paste.html:34
+#: templates/users/settings.html:6 templates/users/settings.html.py:17
+msgid "Settings"
+msgstr "Ustawienia"
+
+#: templates/base.html:75
+msgid "Admin panel"
+msgstr "Panel administratora"
+
+#: templates/base.html:80
+msgid "Logout"
+msgstr "Wyloguj"
+
+#: templates/base.html:85
+msgid "Activity"
+msgstr "Aktywność"
+
+#: templates/base.html:89 templates/users/registration.html:19
+msgid "Sign in"
+msgstr "Rejestracja"
+
+#: templates/base.html:92
+msgid "Log in"
+msgstr "Logowanie"
+
+#: templates/base.html:96
+msgid "Language"
+msgstr "Język"
+
+#: templates/base.html:122
+msgid "Recently added"
+msgstr "Ostatnio dodane"
+
+#: templates/notifications/list.html:6 templates/notifications/list.html:14
+msgid "Notifications"
+msgstr "Powiadomienia"
+
+#: templates/notifications/list.html:21
+msgid "Mark all as read"
+msgstr "Oznacz wszystko jako przeczytane"
+
+#: templates/notifications/list.html:30
+msgid "Description"
+msgstr "Opis"
+
+#: templates/notifications/list.html:31
+msgid "When"
+msgstr "Kiedy"
+
+#: templates/notifications/list.html:32 templates/notifications/list.html:48
+msgid "Read"
+msgstr "Czytaj"
+
+#: templates/notifications/list.html:42
+msgid "in"
+msgstr "w"
+
+#: templates/password_reset/recovery_done.html:5
+#: templates/password_reset/recovery_email_subject.txt:2
+#: templates/password_reset/recovery_form.html:5
+#: templates/password_reset/recovery_form.html:14
+#: templates/password_reset/reset.html:5
+#: templates/password_reset/reset_sent.html:5
+msgid "Password recovery"
+msgstr "Odzyskiwanie hasła"
+
+#: templates/password_reset/recovery_done.html:11
+msgid "New password set"
+msgstr "Ustawianie nowego hasła"
+
+#: templates/password_reset/recovery_done.html:15
+msgid ""
+"Your password has successfully been reset. You can use it right now on the "
+"login page."
+msgstr "Twoje hasło zostało zmienione. Możesz go użyć na stronie logowania."
+
+#: templates/password_reset/recovery_form.html:22
+msgid "Recover my password"
+msgstr "Odzyskaj moje hasło"
+
+#: templates/password_reset/reset.html:13
+msgid "Password reset confirm"
+msgstr "Potwierdź zresetowanie hasła"
+
+#: templates/password_reset/reset.html:18
+#, python-format
+msgid ""
+"Sorry, this password reset link is invalid. You can still <a href="
+"\"%(recovery_url_t)s\">request a new one</a>."
+msgstr ""
+"Przepraszamy, ten link jest nieprawidłowy. Nadal możesz <a href="
+"\"%(recovery_url_t)s\">wygenerować nowy</a>."
+
+#: templates/password_reset/reset.html:27
+#: templates/pastes/modify_paste.html:67
+msgid "Submit"
+msgstr "Wyślij"
+
+#: templates/password_reset/reset_sent.html:11
+msgid "Password recovery sent"
+msgstr "Email został wysłany"
+
+#: templates/password_reset/reset_sent.html:14
+#, python-format
+msgid ""
+"An email was sent to <strong>%(email_t)s</strong>. Use the link in it to set "
+"a new password."
+msgstr ""
+"Email został wysłany do <strong>%(email_t)s</strong>. Użyj adresu z "
+"wiadomości aby ustawić nowe hasło."
+
+#: templates/pastes/comments.html:11
+msgid "Comments"
+msgstr "Komentarze"
+
+#: templates/pastes/comments.html:35
+msgid "reply"
+msgstr "odpowiedz"
+
+#: templates/pastes/comments.html:68
+msgid "Add new comment"
+msgstr "Dodaj komentarz"
+
+#: templates/pastes/comments.html:87
+msgid "Add comment"
+msgstr "Dodaj komentarz"
+
+#: templates/pastes/comments.html:89
+msgid "Cancel"
+msgstr "Anuluj"
+
+#: templates/pastes/delete_paste.html:5 templates/pastes/delete_paste.html:14
+msgid "Delete paste"
+msgstr "Usuń wklejkę"
+
+#: templates/pastes/delete_paste.html:16
+#, python-format
+msgid "Are you sure you want to delete \"%(object_t)s\"?"
+msgstr "Czy na pewno usunąć \"%(object_t)s\"?"
+
+#: templates/pastes/delete_paste.html:21
+msgid "Yes"
+msgstr "Tak"
+
+#: templates/pastes/delete_paste.html:24
+msgid "No"
+msgstr "Nie"
+
+#: templates/pastes/modify_paste.html:8
+msgid "Edit paste"
+msgstr "Edytuj wklejkę"
+
+#: templates/pastes/modify_paste.html:10 templates/pastes/modify_paste.html:24
+msgid "New paste"
+msgstr "Nowa wklejka"
+
+#: templates/pastes/modify_paste.html:22
+msgid "Edit Paste"
+msgstr "Edytuj wklejkę"
+
+#: templates/pastes/paste_list.html:10
+msgid "Name"
+msgstr "Nazwa"
+
+#: templates/pastes/paste_list.html:11
+msgid "Added"
+msgstr "Dodano"
+
+#: templates/pastes/paste_list.html:12
+msgid "Expires"
+msgstr "Wygasa"
+
+#: templates/pastes/paste_list.html:13
+msgid "Hits"
+msgstr "Odsłony"
+
+#: templates/pastes/paste_list.html:15 templates/pastes/paste_list.html:29
+msgid "Edit"
+msgstr "Edytuj"
+
+#: templates/pastes/paste_list.html:16 templates/pastes/paste_list.html:30
+msgid "Delete"
+msgstr "Usuń"
+
+#: templates/pastes/trends.html:7 templates/pastes/trends.html.py:15
+msgid "Treninding pastes"
+msgstr "Trendy"
+
+#: templates/pastes/trends.html:22
+msgid "Today"
+msgstr "Dzisiaj"
+
+#: templates/pastes/trends.html:23
+msgid "Last 7 days"
+msgstr "Ostatnie 7 dni"
+
+#: templates/pastes/trends.html:24
+msgid "Last 30 days"
+msgstr "Ostatni 30 dni"
+
+#: templates/pastes/trends.html:25
+msgid "Last 365 days"
+msgstr "Ostatnie 365 dni"
+
+#: templates/pastes/trends.html:26
+msgid "All time"
+msgstr "Cały czas"
+
+#: templates/users/login.html:6 templates/users/login.html.py:16
+#: templates/users/login.html:23
+msgid "Login"
+msgstr "Zaloguj"
+
+#: templates/users/login.html:25
+msgid "Forgot password?"
+msgstr "Zapomniałeś hasła?"
+
+#: templates/users/profile.html:16
+msgid "Edit profile"
+msgstr "Edycja profilu"
+
+#: templates/users/profile.html:24 templates/users/settings.html:25
+msgid "Update"
+msgstr "Aktualizuj"
+
+#: templates/users/registration.html:5
+msgid "Registration"
+msgstr "Rejestracja"
+
+#: templates/users/registration.html:27
+msgid "Register"
+msgstr "Zarejestruj"
+
+#: templates/users/user_pastes.html:8
+#, python-format
+msgid "%(username)s's Djastebin"
+msgstr "%(username)s"
+
+#: templates/users/user_pastes.html:23
+#, python-format
+msgid "Joined: %(date_joined_t)s | Total pastes: %(total_pastes_t)s"
+msgstr "Dołączył: %(date_joined_t)s | Ilośc wklejek: %(total_pastes_t)s"
+
+#~ msgid "Password recovery | DjasteBin"
+#~ msgstr "Odzyskiwanie hasła"
