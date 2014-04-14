@@ -13,6 +13,25 @@
 				<div class="page-header no-margin-top">
 					<h3 class="no-margin-top">{{ paste.title }}</h3>
 				</div>
+				<div class="">
+					Language: 
+						{% if paste.syntax != 'NONE' %}						
+							{{paste.syntax}}
+						{% else %} 
+							Plaintext
+						{% endif %} | 
+					Created: {{paste.created}} | 
+					Author: 
+						{% if paste.author != None %} 
+							<a href="{% url "user" paste.author %}">{{paste.author}}</a>
+						{% else %} 
+							Anonymous 
+						{% endif %}  |
+					Size: {{paste.size}}kB | Hits: {{paste.hits}} 
+					{% if paste.expire_date != None %}
+					| Expires: {{paste.expire_date}}
+					{% endif %} 
+				</div>
 			</div>
 		</div>
 		<div class="row">
