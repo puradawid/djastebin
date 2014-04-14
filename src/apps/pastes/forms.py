@@ -57,7 +57,7 @@ class CommentForm(ModelForm):
         else:
             result.parent = Comment.objects.get(pk=pk)
             if result.parent.level > 2:
-                raise forms.ValidationError("Can't reply to comments on level more than 2")
+                result.parent = result.parent.parent
             
         result.save()
         return result

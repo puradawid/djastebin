@@ -2,6 +2,8 @@
 <html lang="en">
 	{% load staticfiles %}
 	{% load humanize %}
+	{% load notifications_tags %}
+	{% notifications_unread as unread_count %}
 	<head>
 		<meta charset="utf-8">
 
@@ -62,6 +64,9 @@
 										<a href="{% url "logout" %}"><i class="fa fa-sign-out"></i> Logout</a>
 									</li>
 								</ul>
+							</li>
+							<li>
+								<a class="dropdown-toggle" href="/notifications/" id="themes"><i class="fa fa-envelope"></i> Activity <span class="badge"> {{ unread_count }}</span></a>
 							</li>
 							{% if user.is_staff %}
 								<li>

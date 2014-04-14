@@ -4,6 +4,10 @@ from mptt.models import MPTTModel, TreeForeignKey
 from hashids import Hashids
 import time
 import settings
+from django.dispatch.dispatcher import receiver
+from django.db.models.signals import post_save
+from notifications import notify
+import re
 
 class Paste(models.Model):
     SYNTAX_CHOICES = (
@@ -51,8 +55,21 @@ class Comment(MPTTModel):
     
     def get_absolute_url(self):
         from django.core.urlresolvers import reverse
-        return reverse('show_paste', args=[str(self.pk)])
+        return "%s#%s" % (reverse('show_paste', args=[str(self.paste.pk)]), self.pk) 
 
     class MPTTMeta:
         order_insertion_by = ['created']
+        
+        
+@receiver(post_save, sender=Comment)
+def send_comment_notification(sender, created, instance, **kwargs):
+    if created:
+        iter = set(re.findall("(?: |^)@([\w_-]+)", instance.content))
+        for i in iter:
+            try:
+                user_found = User.objects.get(username=i)
+                if user_found != instance.author:
+                    notify.send(instance.author, recipient=user_found,verb='used your name', action_object=instance, target=instance.paste)
+            except User.DoesNotExist:
+                pass
 

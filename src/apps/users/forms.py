@@ -3,9 +3,13 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.forms.models import ModelForm
 from django.contrib.auth.hashers import make_password
+from django.utils.translation import ugettext_lazy as _
 
 class UserRegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True)
+    username = forms.RegexField(label=_("Username"), max_length=30, regex=r'^[\w._-]+$',
+        help_text = _("Required. 30 characters or fewer. Alphanumeric characters only (letters, digits, underscores and period)."),
+        error_message = _("This value must contain only letters, numbers, underscores and periods."))
 
     class Meta:
         model = User

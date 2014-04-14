@@ -12,6 +12,7 @@ from django.views.generic.list import ListView
 from datetime import timedelta
 from django.utils import timezone
 from django.forms.models import model_to_dict
+from notifications.models import Notification
 # Managing and displaying pastes views
 
 class CreatePasteView(CreateView):
@@ -32,7 +33,6 @@ class CreatePasteView(CreateView):
 class ReadPasteView(CreateView):
     template_name = 'pastes/paste.html'
     form_class = forms.CommentForm
-    success_url = '.'
     
     def get_context_data(self, **kwargs):
         origin = Paste.objects.get(pk=self.kwargs['pk'])
@@ -42,6 +42,7 @@ class ReadPasteView(CreateView):
             if not origin.author == self.request.user:
                 raise PermissionDenied       
         context['nodes'] = Comment.objects.filter(paste=Paste.objects.get(pk=self.kwargs['pk']))
+        Notification.objects.filter(recipient=self.request.user, target_object_id=origin.pk).mark_all_as_read()
         return context
     
     def form_valid(self, form):
