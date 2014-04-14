@@ -38,8 +38,7 @@ class ReadPasteView(CreateView):
         origin = Paste.objects.get(hash=self.kwargs['hash'])
         context = super(ReadPasteView, self).get_context_data(**kwargs)
         context['paste'] = origin
-	origin.hits += 1
-	origin.save()
+        self.increment_hits(origin)
         if origin.visibility == 'PRIVATE':
             if not origin.author == self.request.user:
                 raise PermissionDenied       
@@ -51,7 +50,14 @@ class ReadPasteView(CreateView):
         form.instance.paste = Paste.objects.get(hash=self.kwargs['hash'])
         return super(ReadPasteView, self).form_valid(form)
 
+    def increment_hits(self, paste):
+	if paste.id in self.request.session: 
+               paste.hits += 1
+               paste.save()
+               self.request.session[paste.id] = 1
+
 class UpdatePasteView(LoginRequiredMixin, UpdateView):
+
     model = Paste
     template_name = 'pastes/modify_paste.html'
     form_class = forms.PasteFormEdit

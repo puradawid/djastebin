@@ -23,7 +23,7 @@
 					Created: {{paste.created}} | 
 					Author: 
 						{% if paste.author != None %} 
-							{{paste.author}}
+							<a href="{% url "user" paste.author %}">{{paste.author}}</a>
 						{% else %} 
 							Anonymous 
 						{% endif %}  |
