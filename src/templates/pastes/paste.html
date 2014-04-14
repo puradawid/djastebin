@@ -27,8 +27,10 @@
 						{% else %} 
 							Anonymous 
 						{% endif %}  |
-					Size: {{paste.size}}kB | Hits: {{paste.hits}} |
-					Expires: {{paste.expire_date}} 
+					Size: {{paste.size}}kB | Hits: {{paste.hits}} 
+					{% if paste.expire_date != None %}
+					| Expires: {{paste.expire_date}}
+					{% endif %} 
 				</div>
 			</div>
 		</div>

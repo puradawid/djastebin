@@ -38,6 +38,8 @@ class ReadPasteView(CreateView):
         origin = Paste.objects.get(hash=self.kwargs['hash'])
         context = super(ReadPasteView, self).get_context_data(**kwargs)
         context['paste'] = origin
+	origin.hits += 1
+	origin.save()
         if origin.visibility == 'PRIVATE':
             if not origin.author == self.request.user:
                 raise PermissionDenied       
