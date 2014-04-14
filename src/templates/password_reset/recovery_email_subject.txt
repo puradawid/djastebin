@@ -1,1 +1,2 @@
-Password recovery | DjasteBin
+{% load i18n %}
+{% trans "Password recovery" %} | DjasteBin

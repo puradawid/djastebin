@@ -2,6 +2,8 @@
 <html lang="en">
 	{% load staticfiles %}
 	{% load humanize %}
+	{% load i18n %}
+	{% get_available_languages as LANGUAGES %}
 	{% load notifications_tags %}
 	{% notifications_unread as unread_count %}
 	<head>
@@ -38,26 +40,25 @@
 				<div class="navbar-collapse collapse" id="navbar-main">
 					<ul class="nav navbar-nav">
 						<li>
-							<a href="{% url "create_paste" %}"><i class="fa fa-file-text-o"></i> Create new paste</a>
+							<a href="{% url "create_paste" %}"><i class="fa fa-file-text-o"></i> {% trans "Create new paste" %}</a>
 						</li>
 						<li>
-							<a href="{% url "trends" %}"><i class="fa fa-bar-chart-o"></i> Treniding pastes</a>
+							<a href="{% url "trends" %}"><i class="fa fa-bar-chart-o"></i> {% trans "Treniding pastes" %}</a>
 						</li>
 					</ul>
-
 					<ul class="nav navbar-nav navbar-right">
 						{% if user.is_authenticated %}
 							<li>
-								<a href="{% url "user" user.username %}"><i class="fa fa-files-o"></i> My pastes</a>
+								<a href="{% url "user" user.username %}"><i class="fa fa-files-o"></i> {% trans "My pastes" %}</a>
 							</li>
 							<li class="dropdown">
 								<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes"><i class="fa fa-user"></i> {{ user.username }}<span class="caret"></span></a>
 								<ul class="dropdown-menu" aria-labelledby="themes">
 									<li>
-										<a href="{% url "profile" %}"><i class="fa fa-user"></i> Profile</a>
+										<a href="{% url "profile" %}"><i class="fa fa-user"></i> {% trans "Profile" %}</a>
 									</li>
 									<li>
-										<a href="{% url "settings" %}"><i class="fa fa-gear"></i> Settings</a>
+										<a href="{% url "settings" %}"><i class="fa fa-gear"></i> {% trans "Settings" %}</a>
 									</li>
 									{% if user.is_staff %}
 										<li class="divider"></li>
@@ -67,7 +68,7 @@
 									{% endif %}
 									<li class="divider"></li>
 									<li>
-										<a href="{% url "logout" %}"><i class="fa fa-sign-out"></i> Logout</a>
+										<a href="{% url "logout" %}"><i class="fa fa-sign-out"></i> {% trans "Logout" %}</a>
 									</li>
 								</ul>
 							</li>
@@ -76,12 +77,26 @@
 							</li>
 						{% else %}
 						<li>
-							<a href="{% url "registration" %}"><i class="fa fa-user"></i> Sign in</a>
+							<a href="{% url "registration" %}"><i class="fa fa-user"></i> {% trans "Sign in" %}</a>
 						</li>
 						<li>
-							<a href="{% url "login" %}"><i class="fa fa-sign-in"></i> Log in</a>
+							<a href="{% url "login" %}"><i class="fa fa-sign-in"></i> {% trans "Log in" %}</a>
 						</li>
 						{% endif %}
+					    <li class="dropdown">
+					        <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">{% trans "Language" %}<b class="caret"></b></a>
+					        <ul class="dropdown-menu" aria-labelledby="themes">
+						    {% for lang in LANGUAGES %}
+						        <li>
+						        	<a href="#" onclick="document.setLang{{ lang.1 }}.submit();return false;"><i class="fa fa-user"></i> {{ lang.1 }}</a>
+				                    <form name="setLang{{ lang.1}}" action="/i18n/setlang/" method="POST">{% csrf_token %}
+				                        <input name="next" type="hidden" value="/" />
+				                        <input type="hidden" name="language" value="{{ lang.0 }}" />
+				                    </form>
+				                </li>
+					        {% endfor %}    
+							</ul>
+					    </li>
 					</ul>
 
 				</div>
@@ -96,7 +111,7 @@
 				</div>
 				<div class="col-lg-3">
 					<div class="page-header no-margin-top">
-						<h3 class="no-margin-top">Recently added</h3>
+						<h3 class="no-margin-top">{% trans "Recently added" %}</h3>
 					</div>
 					<div class="col-lg-13">
 						<div class="bs-component">

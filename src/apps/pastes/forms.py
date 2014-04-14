@@ -9,15 +9,16 @@ from django.forms.models import ModelForm
 from datetime import timedelta
 from django.utils import timezone
 from apps.users.models import Settings
+from django.utils.translation import ugettext as _
 
 class PasteForm(forms.ModelForm):
     class Meta:
         model = Paste
         fields = ['title', 'content', 'syntax', 'visibility']
-        
-    syntax = forms.ChoiceField(choices=Paste.SYNTAX_CHOICES)
-    visibility = forms.ChoiceField(choices=Paste.VISIBILITY_CHOICES) 
-    expiration = forms.ChoiceField(choices=Settings.EXPIRATION_CHOICES)
+
+    syntax = forms.ChoiceField(label=_('Syntax'), choices=Paste.SYNTAX_CHOICES)
+    visibility = forms.ChoiceField(label=_('Visibility'), choices=Paste.VISIBILITY_CHOICES) 
+    expiration = forms.ChoiceField(label=_('Expiration'), choices=Settings.EXPIRATION_CHOICES)
     
     def save(self):
         result = super(PasteForm, self).save(commit=False)
@@ -37,7 +38,7 @@ class PasteForm(forms.ModelForm):
 class PasteFormEdit(PasteForm):    
     def __init__(self, *args, **kwargs):
         super(PasteFormEdit, self).__init__(*args, **kwargs)       
-        self.fields['expiration'] = forms.ChoiceField(choices=(('-1', 'Don\'t change'),) + Settings.EXPIRATION_CHOICES)
+        self.fields['expiration'] = forms.ChoiceField(choices=(('-1', _('Don\'t change')),) + Settings.EXPIRATION_CHOICES)
     
 class CommentForm(ModelForm):
     comment_parent = forms.CharField(required=False, widget = forms.HiddenInput())
