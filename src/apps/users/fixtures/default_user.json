@@ -3,8 +3,8 @@
 		"model": "users.settings",
 		"pk": "1",
 		"fields": {
-			"default_syntax": "NONE",
-			"default_visibility": "PUBLIC"
+			"syntax": "NONE",
+			"visibility": "PUBLIC"
 		}
 	},
 	{

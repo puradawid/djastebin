@@ -8,26 +8,25 @@ from apps.users.views import SettingsView
 class AccountTestCase(TestCase):
     username = 'foo'
     password = 'SuperStrongPassword'
-    default_syntax = 'NONE'
-    default_visibility = 'PUBLIC'
+    syntax = 'NONE'
+    visibility = 'PUBLIC'
     
     def setUp(self):
         user = User.objects.create_user(username=self.username, password=self.password)
-        settings = Settings.objects.create(default_syntax=self.default_syntax, default_visibility=self.default_visibility)
-        account = Account.objects.create(user = user, settings = settings)
-    
+        settings = Settings.objects.create(syntax=self.syntax, visibility=self.visibility)
+
     def test_db(self):
         user = User.objects.get(username=self.username)
         settings = Settings.objects.get(id=1)
         
         self.assertEqual(user.username, self.username)
-        self.assertEqual(settings.default_syntax, self.default_syntax)
-        self.assertEqual(settings.default_visibility, self.default_visibility)
+        self.assertEqual(settings.syntax, self.syntax)
+        self.assertEqual(settings.visibility, self.visibility)
         
     def test_account_relations(self):
         user = User.objects.get(username=self.username)
-        self.assertEqual(user.account.settings.default_syntax, self.default_syntax)
-        self.assertEqual(user.account.settings.default_visibility, self.default_visibility)
+        self.assertEqual(user.account.settings.syntax, self.syntax)
+        self.assertEqual(user.account.settings.visibility, self.visibility)
         
 class ProfileEditFormTestCase(TestCase):
         
