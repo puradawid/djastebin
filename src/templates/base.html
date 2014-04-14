@@ -2,8 +2,11 @@
 <html lang="en">
 	{% load staticfiles %}
 	{% load humanize %}
+	{% load html_utils %}
 	{% load i18n %}
 	{% get_available_languages as LANGUAGES %}
+	{% get_current_language as LANGUAGE_CODE %}
+	
 	{% load notifications_tags %}
 	{% notifications_unread as unread_count %}
 	<head>
@@ -63,7 +66,7 @@
 									{% if user.is_staff %}
 										<li class="divider"></li>
 										<li>
-											<a href="/admin/"><i class="fa fa-cogs"></i> Admin panel</a>
+											<a href="/admin/"><i class="fa fa-cogs"></i> {% trans "Admin panel" %}</a>
 										</li>
 									{% endif %}
 									<li class="divider"></li>
@@ -88,7 +91,7 @@
 					        <ul class="dropdown-menu" aria-labelledby="themes">
 						    {% for lang in LANGUAGES %}
 						        <li>
-						        	<a href="#" onclick="document.setLang{{ lang.1 }}.submit();return false;"><i class="fa fa-user"></i> {{ lang.1 }}</a>
+						        	<a href="#" onclick="document.setLang{{ lang.1 }}.submit();return false;"><i class="fa{% if lang.0 == LANGUAGE_CODE %} fa-check{% endif %}"></i> {{ lang.1 }}</a>
 				                    <form name="setLang{{ lang.1}}" action="/i18n/setlang/" method="POST">{% csrf_token %}
 				                        <input name="next" type="hidden" value="/" />
 				                        <input type="hidden" name="language" value="{{ lang.0 }}" />
