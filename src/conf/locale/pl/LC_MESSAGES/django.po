@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-13 23:03+0200\n"
+"POT-Creation-Date: 2014-04-14 10:29+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: apps/pastes/forms.py:19 apps/pastes/models.py:25
+#: apps/pastes/forms.py:19 apps/pastes/models.py:29
 msgid "Syntax"
 msgstr "Składnia"
 
-#: apps/pastes/forms.py:20 apps/pastes/models.py:26
+#: apps/pastes/forms.py:20 apps/pastes/models.py:30
 msgid "Visibility"
 msgstr "Widoczność"
 
@@ -33,59 +33,73 @@ msgstr "Czas wygaśnięcia"
 msgid "Don't change"
 msgstr "Nie zmieniaj"
 
-#: apps/pastes/models.py:11
+#: apps/pastes/models.py:15
 msgid "None"
 msgstr "Brak"
 
-#: apps/pastes/models.py:16
+#: apps/pastes/models.py:20
 msgid "Public"
 msgstr "Publiczny"
 
-#: apps/pastes/models.py:17
+#: apps/pastes/models.py:21
 msgid "Unlisted"
 msgstr "Niepubliczny"
 
-#: apps/pastes/models.py:18
+#: apps/pastes/models.py:22
 msgid "Private"
 msgstr "Prywatny"
 
-#: apps/pastes/models.py:21
+#: apps/pastes/models.py:25
 msgid "Title"
 msgstr "Tytuł"
 
-#: apps/users/forms.py:25
+#: apps/users/forms.py:11
+msgid "Username"
+msgstr "Nazwa użytkownika"
+
+#: apps/users/forms.py:12
+msgid ""
+"Required. 30 characters or fewer. Alphanumeric characters only (letters, "
+"digits, underscores and period)."
+msgstr "Wymagane. 30 znaków lub mniej. Litery, cyfry, podkreślenia i kropki."
+
+#: apps/users/forms.py:13
+msgid "This value must contain only letters, numbers, underscores and periods."
+msgstr "Ta wartość może posiadać tylko litery, cyfry, podkreślenia i kropki"
+
+#: apps/users/forms.py:29
 msgid "That username is already taken"
 msgstr "Ta nazwa jest już zajęta"
 
-#: apps/users/forms.py:31 apps/users/forms.py:47
+#: apps/users/forms.py:35 apps/users/forms.py:51
 msgid "That email is already in use"
 msgstr "Ten adres email jest już uzywany"
 
-#: apps/users/forms.py:35
+#: apps/users/forms.py:39
 msgid "Your email"
 msgstr "Twój email"
 
-#: apps/users/forms.py:36
+#: apps/users/forms.py:40
 msgid "Password"
 msgstr "Hasło"
 
-#: apps/users/forms.py:36
+#: apps/users/forms.py:40
 msgid "Leave blank if don't want to change"
 msgstr "Zostaw pole puste jeśli nie chcesz zmieniać"
 
-#: apps/users/forms.py:37
+#: apps/users/forms.py:41
 msgid "First name"
 msgstr "Imię"
 
-#: apps/users/forms.py:37
+#: apps/users/forms.py:41
 msgid "Your first name"
 msgstr "Twoje imię"
 
-#: apps/users/forms.py:38
+#: apps/users/forms.py:42
 msgid "Last name"
 msgstr "Nazwisko"
 
-#: apps/users/forms.py:38
+#: apps/users/forms.py:42
 msgid "Your last name"
 msgstr "Twoje nazwisko"
 
@@ -109,50 +123,82 @@ msgstr "Twoje ustawienia zostały zaktualizowane!"
 msgid "Your profile has been updated!"
 msgstr "Twój profil został zaktualizowany!"
 
-#: templates/base.html:41
+#: settings/common.py:91
+msgid "Polish"
+msgstr ""
+
+#: settings/common.py:92
+msgid "English"
+msgstr ""
+
+#: templates/base.html:43
 msgid "Create new paste"
 msgstr "Utwórz nową wklejkę"
 
-#: templates/base.html:44
+#: templates/base.html:46
 msgid "Treniding pastes"
 msgstr "Trendy"
 
-#: templates/base.html:50
+#: templates/base.html:52
 msgid "My pastes"
 msgstr "Moje wklejki"
 
-#: templates/base.html:56 templates/users/profile.html:6
+#: templates/base.html:58 templates/users/profile.html:6
 msgid "Profile"
 msgstr "Profil"
 
-#: templates/base.html:59 templates/pastes/modify_paste.html:34
+#: templates/base.html:61 templates/pastes/modify_paste.html:34
 #: templates/users/settings.html:6 templates/users/settings.html.py:17
 msgid "Settings"
 msgstr "Ustawienia"
 
-#: templates/base.html:63
-msgid "Logout"
-msgstr "Wyloguj"
-
-#: templates/base.html:69
+#: templates/base.html:66
 msgid "Admin panel"
 msgstr "Panel administratora"
 
-#: templates/base.html:74 templates/users/registration.html:14
+#: templates/base.html:71
+msgid "Logout"
+msgstr "Wyloguj"
+
+#: templates/base.html:76
+msgid "Activity"
+msgstr "Aktywność"
+
+#: templates/base.html:80 templates/users/registration.html:14
 msgid "Sign in"
 msgstr "Rejestracja"
 
-#: templates/base.html:77
+#: templates/base.html:83
 msgid "Log in"
 msgstr "Logowanie"
 
-#: templates/base.html:81
+#: templates/base.html:87
 msgid "Language"
 msgstr "Język"
 
-#: templates/base.html:108
+#: templates/base.html:113
 msgid "Recently added"
 msgstr "Ostatnio dodane"
+
+#: templates/notifications/list.html:6 templates/notifications/list.html:14
+msgid "Notifications"
+msgstr "Powiadomienia"
+
+#: templates/notifications/list.html:30
+msgid "Description"
+msgstr "Opis"
+
+#: templates/notifications/list.html:31
+msgid "When"
+msgstr "Kiedy"
+
+#: templates/notifications/list.html:32 templates/notifications/list.html:48
+msgid "Read"
+msgstr "Czytaj"
+
+#: templates/notifications/list.html:42
+msgid "in"
+msgstr "w"
 
 #: templates/password_reset/recovery_done.html:5
 #: templates/password_reset/recovery_email_subject.txt:2
@@ -208,23 +254,23 @@ msgstr ""
 "Email został wysłany do <strong>%(email_t)s</strong>. Użyj adresu z "
 "wiadomości aby ustawić nowe hasło."
 
-#: templates/pastes/comments.html:7
+#: templates/pastes/comments.html:11
 msgid "Comments"
 msgstr "Komentarze"
 
-#: templates/pastes/comments.html:29
+#: templates/pastes/comments.html:35
 msgid "reply"
 msgstr "odpowiedz"
 
-#: templates/pastes/comments.html:61
+#: templates/pastes/comments.html:68
 msgid "Add new comment"
 msgstr "Dodaj komentarz"
 
-#: templates/pastes/comments.html:69
+#: templates/pastes/comments.html:87
 msgid "Add comment"
 msgstr "Dodaj komentarz"
 
-#: templates/pastes/comments.html:71
+#: templates/pastes/comments.html:89
 msgid "Cancel"
 msgstr "Anuluj"
 
