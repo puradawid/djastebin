@@ -43,7 +43,8 @@ class ReadPasteView(CreateView):
             if not origin.author == self.request.user:
                 raise PermissionDenied       
         context['nodes'] = Comment.objects.filter(paste=Paste.objects.get(pk=self.kwargs['pk']))
-        Notification.objects.filter(recipient=self.request.user, target_object_id=origin.pk).mark_all_as_read()
+        if self.request.user.is_authenticated():
+            Notification.objects.filter(recipient=self.request.user, target_object_id=origin.pk).mark_all_as_read()
         return context
     
     def form_valid(self, form):
@@ -52,10 +53,10 @@ class ReadPasteView(CreateView):
         return super(ReadPasteView, self).form_valid(form)
 
     def increment_hits(self, paste):
-	if paste.id in self.request.session: 
-               paste.hits += 1
-               paste.save()
-               self.request.session[paste.id] = 1
+        if paste.pk not in self.request.session: 
+            paste.hits += 1
+            paste.save()
+            self.request.session[paste.pk] = 1
 
 class UpdatePasteView(LoginRequiredMixin, UpdateView):
 
