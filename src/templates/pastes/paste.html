@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+{% load i18n %}
 {% load widget_tweaks %}
 {% load syntax_highlighting %}
 
@@ -14,22 +15,22 @@
 					<h3 class="no-margin-top">{{ paste.title }}</h3>
 				</div>
 				<div class="">
-					Language: 
+					{% trans "Language" %}: 
 						{% if paste.syntax != 'NONE' %}						
 							{{paste.syntax}}
 						{% else %} 
 							Plaintext
 						{% endif %} | 
-					Created: {{paste.created}} | 
-					Author: 
+					{% trans "Date" %}: {{paste.created}} | 
+					{% trans "Author" %}: 
 						{% if paste.author != None %} 
 							<a href="{% url "user" paste.author %}">{{paste.author}}</a>
 						{% else %} 
-							Anonymous 
+							{% trans "Anonymous" %}
 						{% endif %}  |
-					Size: {{paste.size}}kB | Hits: {{paste.hits}} 
+					{% trans "Size" %}: {{paste.size}}kB | {% trans "Hits" %}: {{paste.hits}} 
 					{% if paste.expire_date != None %}
-					| Expires: {{paste.expire_date}}
+					| {% trans "Expires" %}: {{paste.expire_date}}
 					{% endif %} 
 				</div>
 			</div>

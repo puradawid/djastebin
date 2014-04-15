@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-14 15:48+0200\n"
+"POT-Creation-Date: 2014-04-14 23:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -176,7 +176,7 @@ msgstr "Rejestracja"
 msgid "Log in"
 msgstr "Logowanie"
 
-#: templates/base.html:96
+#: templates/base.html:96 templates/pastes/paste.html:17
 msgid "Language"
 msgstr "Język"
 
@@ -311,6 +311,30 @@ msgstr "Nowa wklejka"
 msgid "Edit Paste"
 msgstr "Edytuj wklejkę"
 
+#: templates/pastes/paste.html:23
+msgid "Date"
+msgstr "Data"
+
+#: templates/pastes/paste.html:24
+msgid "Author"
+msgstr "Author"
+
+#: templates/pastes/paste.html:28
+msgid "Anonymous"
+msgstr "Anonim"
+
+#: templates/pastes/paste.html:30
+msgid "Size"
+msgstr "Wielkość"
+
+#: templates/pastes/paste.html:30 templates/pastes/paste_list.html:13
+msgid "Hits"
+msgstr "Odsłony"
+
+#: templates/pastes/paste.html:32 templates/pastes/paste_list.html:12
+msgid "Expires"
+msgstr "Wygasa"
+
 #: templates/pastes/paste_list.html:10
 msgid "Name"
 msgstr "Nazwa"
@@ -318,14 +342,6 @@ msgstr "Nazwa"
 #: templates/pastes/paste_list.html:11
 msgid "Added"
 msgstr "Dodano"
-
-#: templates/pastes/paste_list.html:12
-msgid "Expires"
-msgstr "Wygasa"
-
-#: templates/pastes/paste_list.html:13
-msgid "Hits"
-msgstr "Odsłony"
 
 #: templates/pastes/paste_list.html:15 templates/pastes/paste_list.html:29
 msgid "Edit"
@@ -397,6 +413,9 @@ msgstr "%(username)s"
 #, python-format
 msgid "Joined: %(date_joined_t)s | Total pastes: %(total_pastes_t)s"
 msgstr "Dołączył: %(date_joined_t)s | Ilośc wklejek: %(total_pastes_t)s"
+
+#~ msgid "Created"
+#~ msgstr "Utworzono"
 
 #~ msgid "Password recovery | DjasteBin"
 #~ msgstr "Odzyskiwanie hasła"
