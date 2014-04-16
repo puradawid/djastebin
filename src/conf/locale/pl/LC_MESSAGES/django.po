@@ -270,6 +270,10 @@ msgstr "Komentarze"
 msgid "reply"
 msgstr "odpowiedz"
 
+#: templates/pastes/comments.html:37
+msgid "delete"
+msgstr "usuń"
+
 #: templates/pastes/comments.html:68
 msgid "Add new comment"
 msgstr "Dodaj komentarz"

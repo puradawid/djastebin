@@ -33,7 +33,7 @@
 						<span class="comment-date">{{ node.created|naturaltime }}</span>
 						{% if user.is_authenticated %}
 							<span class="comment-reply"><a href="#" id="node_{{ node.pk }}">{% trans "reply" %}</a></span>
-							{% if user.pk == node.author.pk %}
+							{% if user.pk == node.author.pk and node.deleted == False %}
 								<span class="comment-delete"><a href='{% url "delete_comment" node.pk %}'>{% trans "delete" %}</a></span>
 							{% endif %}
 						{% endif %}
