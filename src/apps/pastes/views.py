@@ -4,7 +4,7 @@
 from apps.pastes.models import Paste, Comment
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from apps.pastes import forms
-from django.http.response import Http404 
+from django.http.response import Http404 , HttpResponse, HttpResponseRedirect
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from braces.views import LoginRequiredMixin 
@@ -103,3 +103,25 @@ class TrendingPastesView(ListView):
             'days': self.kwargs['days'],
         })
         return context
+
+class DeleteCommentView(LoginRequiredMixin, DeleteView):
+    model = Comment
+    template_name = 'pastes/delete_comment.html'
+    paste_pk = ''
+    
+    def get_object(self, *args, **kwargs):
+        obj = super(DeleteCommentView, self).get_object(*args, **kwargs)
+        if not obj.author == self.request.user:
+            raise Http404
+        self.paste_pk = obj.paste.pk
+        return obj
+    
+    def delete(self, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.deleted = True
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
+    
+    def get_success_url(self):
+        print self.paste_pk
+        return reverse('show_paste', args=[self.paste_pk])

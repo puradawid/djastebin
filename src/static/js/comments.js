@@ -17,6 +17,7 @@ $(document).ready(function() {
 		$('#comment_form').insertAfter('#comments_tree');
 		$('input[id=id_comment_parent]').val('');
 		$('#cancel_reply').css('display', 'none');
+		$('#id_content').val('');
 		return false;
 	});
 });

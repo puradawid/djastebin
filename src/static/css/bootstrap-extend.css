@@ -2,6 +2,10 @@
 	margin-top: 15px;
 }
 
+.bottom5 {
+	margin-bottom: 5px;
+}
+
 .no-resize {
 	resize: none;
 }
@@ -24,6 +28,10 @@
 }
 
 .comment-reply {
+	margin: 0px 0px 0px 10px;
+}
+
+.comment-delete {
 	margin: 0px 0px 0px 10px;
 }
 

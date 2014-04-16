@@ -59,7 +59,7 @@ class Comment(MPTTModel):
         if self.deleted == False:
             return self.content
         else:
-            return _('[deleted by administrator]')
+            return _('[deleted]')
     
     def get_absolute_url(self):
         from django.core.urlresolvers import reverse
