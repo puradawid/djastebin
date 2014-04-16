@@ -124,4 +124,4 @@ class DeleteCommentView(LoginRequiredMixin, DeleteView):
     
     def get_success_url(self):
         print self.paste_pk
-        return reverse('show_paste', args=[self.pk])
+        return reverse('show_paste', args=[self.paste_pk])
