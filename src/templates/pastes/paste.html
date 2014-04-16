@@ -21,6 +21,7 @@
 							Plaintext
 						{% endif %} | 
 					Created: {{paste.created}} | 
+					<a href="{% url "raw_paste" paste.hash paste.filename %}"">RAW</a> |
 					Author: 
 						{% if paste.author != None %} 
 							<a href="{% url "user" paste.author %}">{{paste.author}}</a>
@@ -39,6 +40,18 @@
 				{% autoescape off %}
 				{{paste.content|syntax_highlight:paste.syntax}}
 				{% endautoescape %}
+			</div>
+		</div>
+		<div class="row">
+			<div class="row top15">
+				<div class="col-lg-12">
+					<div class="page-header no-margin-top">
+						<h3 class="no-margin-top">RAW paste</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+			<textarea>{{paste.content}}</textarea>
 			</div>
 		</div>
 		{% include "pastes/comments.html" %}

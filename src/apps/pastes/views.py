@@ -12,6 +12,8 @@ from django.views.generic.list import ListView
 from datetime import timedelta
 from django.utils import timezone
 from django.forms.models import model_to_dict
+from django.views.generic import View
+from django.http import HttpResponse
 # Managing and displaying pastes views
 
 class CreatePasteView(CreateView):
@@ -51,7 +53,7 @@ class ReadPasteView(CreateView):
         return super(ReadPasteView, self).form_valid(form)
 
     def increment_hits(self, paste):
-	if paste.id in self.request.session: 
+	if not paste.id in self.request.session: 
                paste.hits += 1
                paste.save()
                self.request.session[paste.id] = 1
@@ -101,3 +103,7 @@ class TrendingPastesView(ListView):
             'days': self.kwargs['days'],
         })
         return context
+
+class PasteRawView(View):
+    def get(self, *args, **kwargs):
+        return HttpResponse(Paste.objects.get(hash=kwargs['hash']).content, content_type='text/plain')

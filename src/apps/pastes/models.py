@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from mptt.models import MPTTModel, TreeForeignKey
 from hashids import Hashids
+from django.utils.text import slugify
 
 class Paste(models.Model):
     SYNTAX_CHOICES = (
@@ -9,6 +10,11 @@ class Paste(models.Model):
             ('JAVA', 'Java'),
             ('PYTHON', 'Python'),
     )
+    FILE_EXTENSIONS = {
+            'NONE': 'txt',
+            'JAVA': 'java',
+            'PYTHON': 'py'
+    }
     VISIBILITY_CHOICES = (
             ('PUBLIC', 'Public'),
             ('UNLISTED', 'Unlisted'),
@@ -37,7 +43,10 @@ class Paste(models.Model):
             self.save()
         else:
             super(Paste, self).save(*args, **kwargs)
-
+    
+    def filename(self):
+        return slugify(self.title)+'.'+self.FILE_EXTENSIONS[self.syntax]
+    
     def __unicode__(self):
         return self.title
     
