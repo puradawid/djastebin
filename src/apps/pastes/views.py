@@ -107,13 +107,13 @@ class TrendingPastesView(ListView):
 class DeleteCommentView(LoginRequiredMixin, DeleteView):
     model = Comment
     template_name = 'pastes/delete_comment.html'
-    pk = ''
+    paste_pk = ''
     
     def get_object(self, *args, **kwargs):
         obj = super(DeleteCommentView, self).get_object(*args, **kwargs)
         if not obj.author == self.request.user:
             raise Http404
-        self.pk = obj.paste.pk
+        self.paste_pk = obj.paste.pk
         return obj
     
     def delete(self, *args, **kwargs):
@@ -123,5 +123,5 @@ class DeleteCommentView(LoginRequiredMixin, DeleteView):
         return HttpResponseRedirect(self.get_success_url())
     
     def get_success_url(self):
-        print self.pk
+        print self.paste_pk
         return reverse('show_paste', args=[self.pk])
