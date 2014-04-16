@@ -1,10 +1,7 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
-from apps.users.models import Settings, Account
-from apps.users.forms import ProfileEditForm, SettingsChangeForm
-from apps.pastes.models import Paste
-from django import forms
-from django.forms.models import ModelForm
+from apps.users.models import Settings
+from apps.users.forms import ProfileEditForm
 
 class AccountTestCase(TestCase):
     
@@ -58,52 +55,3 @@ class ProfileEditFormTestCase(TestCase):
         data = { 'email': 'johnny@example.com', 'first_name': 'John', 'last_name': 'Smith', 'password':  'ExtremelyHardPassword'}
         form = ProfileEditForm(data = data)
         self.assertTrue(form.is_valid())
-        
-class SettingsChangeFormTestCase(TestCase):
-    SYNTAX_CHOICES = Paste.SYNTAX_CHOICES
-    VISIBILITY_CHOICES = Paste.VISIBILITY_CHOICES
-    EXPIRATION_CHOICES = Settings.EXPIRATION_CHOICES # Temporary
-    
-    def setUp(self):
-        pass
-    
-    def test_invalid_form(self):
-        "Submit invalid data"
-        
-        #Submit no data
-        form = SettingsChangeForm()
-        self.assertFalse(form.is_valid())
-        
-        #Submit invalid data (not exists in choices)
-        data = { 'syntax': 'foo', 'visibility': 'foo', 'expiration': 'foo' }
-        form = SettingsChangeForm()
-        self.assertFalse(form.is_valid())
-    
-    def test_valid_form(self):
-        "Submit valid data"
-        
-        # Submit default data
-        data = { 'syntax': 'NONE', 'visibility': 'PUBLIC', 'expiration': '0' }
-        form = SettingsChangeForm(data=data)
-        self.assertTrue(form.is_valid())
-        
-        # Submit all syntax data
-        for i in range(len(self.SYNTAX_CHOICES)):
-            choice = self.SYNTAX_CHOICES[i]
-            data = { 'syntax': choice[0], 'visibility': 'PUBLIC', 'expiration': '0' }
-            form = SettingsChangeForm(data=data)
-            self.assertTrue(form.is_valid())
-            
-        # Submit all visibility data
-        for i in range(len(self.VISIBILITY_CHOICES)):
-            choice = self.VISIBILITY_CHOICES[i]
-            data = { 'syntax': 'NONE', 'visibility': choice[0], 'expiration': '0' }
-            form = SettingsChangeForm(data=data)
-            self.assertTrue(form.is_valid())
-            
-        # Submit all syntax data
-        for i in range(len(self.EXPIRATION_CHOICES)):
-            choice = self.EXPIRATION_CHOICES[i]
-            data = { 'syntax': 'NONE', 'visibility': 'PUBLIC', 'expiration': choice[0] }
-            form = SettingsChangeForm(data=data)
-            self.assertTrue(form.is_valid())

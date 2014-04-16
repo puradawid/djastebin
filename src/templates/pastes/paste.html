@@ -1,44 +1,58 @@
 {% extends 'base.html' %}
 
+{% load i18n %}
 {% load widget_tweaks %}
 {% load syntax_highlighting %}
 
-{% block title %}Paste{% endblock %}
+{% block title %}{{ paste.title }}{% endblock %}
 
 {% block content %}
-	<style> {{""|get_css}} </style>
+	<style> {{ ""|get_css }} </style>
 	<div class="bs-docs-section">
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="page-header no-margin-top">
-					<h3 class="no-margin-top">{{paste.title}}</h3>
+					<h3 class="no-margin-top">{{ paste.title }}</h3>
 				</div>
-				<div class="">
-					Language: 
+				<div class="bottom5">
+					{% trans "Language" %}: 
 						{% if paste.syntax != 'NONE' %}						
 							{{paste.syntax}}
 						{% else %} 
 							Plaintext
 						{% endif %} | 
-					Created: {{paste.created}} | 
-					Author: 
+					{% trans "Date" %}: {{paste.created}} | 
+					<a href='{% url 'raw_paste' paste.hash paste.filename %}'>RAW</a> |
+					{% trans "Author" %}: 
 						{% if paste.author != None %} 
-							{{paste.author}}
+							<a href="{% url "user" paste.author %}">{{paste.author}}</a>
 						{% else %} 
-							Anonymous 
+							{% trans "Anonymous" %}
 						{% endif %}  |
-					Size: {{paste.size}}kB | Hits: {{paste.hits}} |
-					Expires: {{paste.expire_date}} 
+					{% trans "Size" %}: {{paste.size}}kB | {% trans "Hits" %}: {{paste.hits}} 
+					{% if paste.expire_date != None %}
+					| {% trans "Expires" %}: {{paste.expire_date}}
+					{% endif %} 
 				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
 				{% autoescape off %}
-				{{paste.content|syntax_highlight:paste.syntax}}
+				{{ paste.content|syntax_highlight:paste.syntax }}
 				{% endautoescape %}
 			</div>
 		</div>
+		<div class="row">
+			<div class="row top15">
+				<div class="col-lg-12">
+					<div class="page-header no-margin-top">
+						<h3 class="no-margin-top">RAW paste</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+			<textarea>{{paste.content}}</textarea>
 		{% include "pastes/comments.html" %}
 	</div>
-	{% endblock %}
+{% endblock %}
