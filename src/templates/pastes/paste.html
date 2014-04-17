@@ -29,7 +29,7 @@
 						{% else %} 
 							{% trans "Anonymous" %}
 						{% endif %}  |
-					{% trans "Size" %}: {{paste.size}}kB | {% trans "Hits" %}: {{paste.hits}} 
+					{% trans "Hits" %}: {{paste.hits}} 
 					{% if paste.expire_date != None %}
 					| {% trans "Expires" %}: {{paste.expire_date}}
 					{% endif %} 
@@ -44,8 +44,8 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="row top15">
-				<div class="col-lg-12">
+			<div class="col-lg-12 top15">
+				<div class="">
 					<div class="page-header no-margin-top">
 						<h3 class="no-margin-top">RAW paste</h3>
 					</div>
