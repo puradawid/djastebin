@@ -19,14 +19,15 @@
 {% load widget_tweaks %}
 {% load username_finder %}
 
+{% if nodes %}
 <section id="comments_tree">
 	{% if nodes %}
 		{% recursetree nodes %}
 	
 		<div class="row comment-row">
 			<a class="anchor" name="{{ node.pk }}"></a>
-			<div class='col-lg-{{ "12"|subtract:node.level }} col-lg-offset-{{ node.level }}'>
-				<div class="well col-lg-12{% if node.deleted %} comment-deleted{% endif %}">
+			<div class='col-xs-{{ "12"|subtract:node.level }} col-xs-offset-{{ node.level }}'>
+				<div class="well col-xs-12{% if node.deleted %} comment-deleted{% endif %}">
 					<p>
 						<span class="comment-id"><a href="#{{ node.pk }}">#{{ node.pk }}</a></span>
 						<span class="comment-author"><a href='{% url "user" node.author.username %}'>{{ node.author.username }}</a></span>
@@ -34,6 +35,9 @@
 						{% if user.is_authenticated %}
 							<span class="comment-reply"><a href="#" id="node_{{ node.pk }}">{% trans "reply" %}</a></span>
 							{% if user.pk == node.author.pk and node.deleted == False %}
+								{% if node.is_leaf_node %}
+									<span class="comment-delete"><a href='{% url "update_comment" node.pk %}'>{% trans "edit" %}</a></span>
+								{% endif %}
 								<span class="comment-delete"><a href='{% url "delete_comment" node.pk %}'>{% trans "delete" %}</a></span>
 							{% endif %}
 						{% endif %}
@@ -52,6 +56,13 @@
 		{% endrecursetree %}
 	{% endif %}
 </section>
+{% else %}
+<div class="row">
+	<div class="col-lg-12">
+		<p>There is no comments yet</p>
+	</div>
+</div>
+{% endif %}
 
 {% if user.is_authenticated %}
 <div class="well bs-component col-lg-12" id="comment_form">

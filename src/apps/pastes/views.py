@@ -121,13 +121,26 @@ class DeleteCommentView(LoginRequiredMixin, DeleteView):
     
     def delete(self, *args, **kwargs):
         self.object = self.get_object()
-        self.object.deleted = True
-        self.object.save()
+        if self.object.is_leaf_node():
+            self.object.delete()
+        else:
+            self.object.deleted = True
+            self.object.save()
         return HttpResponseRedirect(self.get_success_url())
     
     def get_success_url(self):
         print self.paste_pk
         return reverse('show_paste', args=[self.paste_pk])
+
+class UpdateCommentView(LoginRequiredMixin, UpdateView):
+    model = Comment
+    template_name = 'pastes/modify_comment.html'
+    form_class = forms.UpdateCommentForm    
+    def get_object(self, *args, **kwargs):
+        obj = super(UpdateCommentView, self).get_object(*args, **kwargs)
+        if not obj.author == self.request.user or obj.is_leaf_node() == False or obj.deleted:
+            raise Http404
+        return obj
 
 class PasteRawView(View):
     def get(self, *args, **kwargs):
