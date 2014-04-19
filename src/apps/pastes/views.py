@@ -129,6 +129,16 @@ class DeleteCommentView(LoginRequiredMixin, DeleteView):
         print self.paste_pk
         return reverse('show_paste', args=[self.paste_pk])
 
+class UpdateCommentView(LoginRequiredMixin, UpdateView):
+    model = Comment
+    template_name = 'pastes/modify_comment.html'
+    form_class = forms.UpdateCommentForm    
+    def get_object(self, *args, **kwargs):
+        obj = super(UpdateCommentView, self).get_object(*args, **kwargs)
+        if not obj.author == self.request.user or obj.is_leaf_node() == False:
+            raise Http404
+        return obj
+
 class PasteRawView(View):
     def get(self, *args, **kwargs):
         return HttpResponse(Paste.objects.get(pk=kwargs['pk']).content, content_type='text/plain')

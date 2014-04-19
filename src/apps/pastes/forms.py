@@ -62,3 +62,10 @@ class CommentForm(ModelForm):
             
         result.save()
         return result
+    
+class UpdateCommentForm(ModelForm):
+    content = forms.CharField(required=True, widget=forms.Textarea(attrs={'rows': 3}))
+    
+    class Meta:
+        model = Comment
+        fields = ['content']
