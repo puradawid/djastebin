@@ -19,6 +19,7 @@
 {% load widget_tweaks %}
 {% load username_finder %}
 
+{% if nodes %}
 <section id="comments_tree">
 	{% if nodes %}
 		{% recursetree nodes %}
@@ -55,6 +56,13 @@
 		{% endrecursetree %}
 	{% endif %}
 </section>
+{% else %}
+<div class="row">
+	<div class="col-lg-12">
+		<p>There is no comments yet</p>
+	</div>
+</div>
+{% endif %}
 
 {% if user.is_authenticated %}
 <div class="well bs-component col-lg-12" id="comment_form">

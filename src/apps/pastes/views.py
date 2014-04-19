@@ -121,8 +121,11 @@ class DeleteCommentView(LoginRequiredMixin, DeleteView):
     
     def delete(self, *args, **kwargs):
         self.object = self.get_object()
-        self.object.deleted = True
-        self.object.save()
+        if self.object.is_leaf_node():
+            self.object.delete()
+        else:
+            self.object.deleted = True
+            self.object.save()
         return HttpResponseRedirect(self.get_success_url())
     
     def get_success_url(self):
@@ -135,7 +138,7 @@ class UpdateCommentView(LoginRequiredMixin, UpdateView):
     form_class = forms.UpdateCommentForm    
     def get_object(self, *args, **kwargs):
         obj = super(UpdateCommentView, self).get_object(*args, **kwargs)
-        if not obj.author == self.request.user or obj.is_leaf_node() == False:
+        if not obj.author == self.request.user or obj.is_leaf_node() == False or obj.deleted:
             raise Http404
         return obj
 
