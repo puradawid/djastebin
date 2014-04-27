@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 
-{% block title %}Profile{% endblock %}
+{% load i18n %}
+{% load widget_tweaks %}
+
+{% block title %}{% trans "Profile" %}{% endblock %}
 
 {% block content %}
-{% load widget_tweaks %}
 	<div class="well bs-component">
 		<form class="form-horizontal" method="post">{% csrf_token %}
 			<fieldset>
@@ -11,7 +13,7 @@
 				{% include "messages.html" with messages=messages type='success' %}
 				
 				<legend>
-					Edit profile
+					{% trans "Edit profile" %}
 				</legend>
 				
 				{% include "fields.html" with fields=form %}
@@ -19,7 +21,7 @@
 				<div class="form-group">
 					<div class="col-lg-10 col-lg-offset-2">
 						<button type="submit" class="btn btn-primary">
-							Update
+							{% trans "Update" %}
 						</button>
 					</div>
 				</div>

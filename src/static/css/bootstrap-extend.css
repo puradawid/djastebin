@@ -2,6 +2,10 @@
 	margin-top: 15px;
 }
 
+.bottom5 {
+	margin-bottom: 5px;
+}
+
 .no-resize {
 	resize: none;
 }
@@ -27,7 +31,20 @@
 	margin: 0px 0px 0px 10px;
 }
 
+.comment-delete {
+	margin: 0px 0px 0px 10px;
+}
+
 #cancel_reply {
 	display: none;
 	margin: 0px 0px 0px 15px;
+}
+
+.forgot-password-btn {
+	float: left;
+}
+
+.comment-deleted {
+	background-color: #e7e6e6;
+	color: #c1c1c1;
 }

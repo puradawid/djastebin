@@ -2,7 +2,7 @@
 
 {% load i18n %}
 
-{% block title %}{% trans "Delete paste" %}{% endblock %}
+{% block title %}{% trans "Delete comment" %}{% endblock %}
 
 {% block content %}
 {% load widget_tweaks %}
@@ -11,7 +11,7 @@
 		<form method="post" class="form-horizontal">{% csrf_token %}
 			<fieldset>
 				<legend>
-					{% trans "Delete paste" %}
+					{% trans "Delete comment" %}
 				</legend>
 				<p>{% blocktrans with object_t=object %}Are you sure you want to delete "{{ object_t }}"?{% endblocktrans %}</p>
 				
@@ -20,7 +20,7 @@
 						<button type="submit" class="btn btn-danger">
 							{% trans "Yes" %}
 						</button>
-						<a class="btn btn-default" href="{% url "show_paste" object.pk %}">
+						<a class="btn btn-default" href="{% url "show_paste" object.paste.pk %}">
 							{% trans "No" %}
 						</a>
 					</div>

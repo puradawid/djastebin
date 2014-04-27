@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 
+{% load i18n %}
 {% load widget_tweaks %}
 {% load syntax_highlighting %}
 
-{% block title %}Paste{% endblock %}
+{% block title %}{{ paste.title }}{% endblock %}
 
 {% block content %}
 	<style> {{ ""|get_css }} </style>
@@ -12,6 +13,26 @@
 			<div class="col-lg-12">
 				<div class="page-header no-margin-top">
 					<h3 class="no-margin-top">{{ paste.title }}</h3>
+				</div>
+				<div class="bottom5">
+					{% trans "Language" %}: 
+						{% if paste.syntax != 'NONE' %}						
+							{{paste.syntax}}
+						{% else %} 
+							Plaintext
+						{% endif %} | 
+					{% trans "Date" %}: {{paste.created}} | 
+					<a href='{% url 'raw_paste' paste.hash paste.filename %}'>RAW</a> |
+					{% trans "Author" %}: 
+						{% if paste.author != None %} 
+							<a href="{% url "user" paste.author %}">{{paste.author}}</a>
+						{% else %} 
+							{% trans "Anonymous" %}
+						{% endif %}  |
+					{% trans "Hits" %}: {{paste.hits}} 
+					{% if paste.expire_date != None %}
+					| {% trans "Expires" %}: {{paste.expire_date}}
+					{% endif %} 
 				</div>
 			</div>
 		</div>
@@ -22,6 +43,16 @@
 				{% endautoescape %}
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-lg-12 top15">
+				<div class="">
+					<div class="page-header no-margin-top">
+						<h3 class="no-margin-top">RAW paste</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+			<textarea>{{paste.content}}</textarea>
 		{% include "pastes/comments.html" %}
 	</div>
 {% endblock %}

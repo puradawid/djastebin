@@ -4,7 +4,7 @@
 from apps.pastes.models import Paste, Comment
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from apps.pastes import forms
-from django.http.response import Http404 
+from django.http.response import Http404 , HttpResponse, HttpResponseRedirect
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from braces.views import LoginRequiredMixin 
@@ -12,6 +12,10 @@ from django.views.generic.list import ListView
 from datetime import timedelta
 from django.utils import timezone
 from django.forms.models import model_to_dict
+from notifications.models import Notification
+from django.views.generic import View
+from django.http import HttpResponse
+
 # Managing and displaying pastes views
 
 class CreatePasteView(CreateView):
@@ -32,16 +36,18 @@ class CreatePasteView(CreateView):
 class ReadPasteView(CreateView):
     template_name = 'pastes/paste.html'
     form_class = forms.CommentForm
-    success_url = '.'
     
     def get_context_data(self, **kwargs):
         origin = Paste.objects.get(pk=self.kwargs['pk'])
         context = super(ReadPasteView, self).get_context_data(**kwargs)
         context['paste'] = origin
+        self.increment_hits(origin)
         if origin.visibility == 'PRIVATE':
             if not origin.author == self.request.user:
                 raise PermissionDenied       
         context['nodes'] = Comment.objects.filter(paste=Paste.objects.get(pk=self.kwargs['pk']))
+        if self.request.user.is_authenticated():
+            Notification.objects.filter(recipient=self.request.user, target_object_id=origin.pk).mark_all_as_read()
         return context
     
     def form_valid(self, form):
@@ -49,7 +55,14 @@ class ReadPasteView(CreateView):
         form.instance.paste = Paste.objects.get(pk=self.kwargs['pk'])
         return super(ReadPasteView, self).form_valid(form)
 
+    def increment_hits(self, paste):
+        if paste.pk not in self.request.session: 
+            paste.hits += 1
+            paste.save()
+            self.request.session[paste.pk] = 1
+
 class UpdatePasteView(LoginRequiredMixin, UpdateView):
+
     model = Paste
     template_name = 'pastes/modify_paste.html'
     form_class = forms.PasteFormEdit
@@ -93,3 +106,42 @@ class TrendingPastesView(ListView):
             'days': self.kwargs['days'],
         })
         return context
+
+class DeleteCommentView(LoginRequiredMixin, DeleteView):
+    model = Comment
+    template_name = 'pastes/delete_comment.html'
+    paste_pk = ''
+    
+    def get_object(self, *args, **kwargs):
+        obj = super(DeleteCommentView, self).get_object(*args, **kwargs)
+        if not obj.author == self.request.user:
+            raise Http404
+        self.paste_pk = obj.paste.pk
+        return obj
+    
+    def delete(self, *args, **kwargs):
+        self.object = self.get_object()
+        if self.object.is_leaf_node():
+            self.object.delete()
+        else:
+            self.object.deleted = True
+            self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
+    
+    def get_success_url(self):
+        print self.paste_pk
+        return reverse('show_paste', args=[self.paste_pk])
+
+class UpdateCommentView(LoginRequiredMixin, UpdateView):
+    model = Comment
+    template_name = 'pastes/modify_comment.html'
+    form_class = forms.UpdateCommentForm    
+    def get_object(self, *args, **kwargs):
+        obj = super(UpdateCommentView, self).get_object(*args, **kwargs)
+        if not obj.author == self.request.user or obj.is_leaf_node() == False or obj.deleted:
+            raise Http404
+        return obj
+
+class PasteRawView(View):
+    def get(self, *args, **kwargs):
+        return HttpResponse(Paste.objects.get(pk=kwargs['pk']).content, content_type='text/plain')

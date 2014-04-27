@@ -2,8 +2,11 @@
 
 {% load widget_tweaks %}
 {% load humanize %}
+{% load i18n %}
 
-{% block title %}{{ user_profile.username }}'s Djastebin{% endblock %}
+{% block title %}
+{% blocktrans with username=user_profile.username %}{{ username }}'s Djastebin{% endblocktrans %}
+{% endblock %}
 
 {% block content %}
 
@@ -17,10 +20,10 @@
 	</div>
 	<div class="row">
 		<div class="col-lg-12">
-			<p>Joined: {{ user_profile.date_joined | naturaltime }} | Total pastes: {{ total_pastes }}</p>
+			<p>{% blocktrans with date_joined_t=user_profile.date_joined|naturaltime total_pastes_t=total_pastes%}Joined: {{ date_joined_t }} | Total pastes: {{ total_pastes_t }}{% endblocktrans %}</p>
 		</div>
 	</div>
-	{% include "pastes/paste_list.html" with enable_editing=True %}
+	{% include "pastes/paste_list.html" with enable_editing=True owner=user_profile %}
 </div>
 
 {% endblock %}

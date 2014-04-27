@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
 
+{% load i18n %}
 {% load widget_tweaks %}
 
 {% block title %}
 	{% if form.instance.pk %}
-		Edit paste
+		{% trans "Edit paste" %}
 	{% else %}
-		Create new paste
+		{% trans "New paste" %}
 	{% endif %}
 {% endblock %}
 
@@ -18,9 +19,9 @@
 			<fieldset>
 				<legend>
 					{% if form.instance.pk %}
-						Edit Paste: {{form.title.value}}
+						{% trans "Edit Paste" %}: {{form.title.value}}
 					{% else %}
-						New paste
+						{% trans "New paste" %}
 					{% endif %}
 				</legend>
 				<div class="form-group {{ form.content.errors|yesno:"has-error," }}">
@@ -30,7 +31,7 @@
 					</div>
 				</div>
 				<legend>
-					Settings
+					{% trans "Settings" %}
 				</legend>
 				<div class="form-group {{ form.title.errors|yesno:"has-error," }}">
 					<label for="inputEmail" class="col-lg-3 control-label">{{form.title.label}}:</label>
@@ -63,7 +64,7 @@
 				<div class="form-group">
 					<div class="col-lg-10 col-lg-offset-3">
 						<button type="submit" class="btn btn-primary">
-							Submit
+							{% trans "Submit" %}
 						</button>
 					</div>
 				</div>
